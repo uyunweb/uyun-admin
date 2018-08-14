@@ -1,0 +1,117 @@
+.aside-nav
+	aside-space = space * 2.5
+	logo-height = 68px
+	height 100%
+	.aside-content
+		height "calc(100% - %s)" % logo-height
+		overflow auto
+		overflow-x hidden
+		background -webkit-linear-gradient(top, aside-bg-start-color 36%, aside-bg-center1-color 68%, aside-bg-center2-color 90%, aside-bg-end-color)
+		background -moz-linear-gradient(top, aside-bg-start-color 36%, aside-bg-center1-color 68%, aside-bg-center2-color 90%, aside-bg-end-color)
+		background -ms-linear-gradient(top, aside-bg-start-color 36%, aside-bg-center1-color 68%, aside-bg-center2-color 90%, aside-bg-end-color)
+		background -o-linear-gradient(top, aside-bg-start-color 36%, aside-bg-center1-color 68%, aside-bg-center2-color 90%, aside-bg-end-color)
+		background linear-gradient(top, aside-bg-start-color 36%, aside-bg-center1-color 68%, aside-bg-center2-color 90%, aside-bg-end-color)
+	.logo
+		display block
+		height logo-height
+		line-height logo-height
+		padding 0 aside-space
+		background logo-bg-color
+		img
+			vertical-align middle
+	.user
+		padding space * 2 aside-space
+		border-top 1px solid #5444a0
+		box-shadow -1px 0px 0 1px #122862
+		background #3b2a95
+		background -webkit-linear-gradient(top, #3b2a95, #3e2c97)
+		background -moz-linear-gradient(top, #3b2a95, #3e2c97)
+		background -ms-linear-gradient(top, #3b2a95, #3e2c97)
+		background -o-linear-gradient(top, #3b2a95, #3e2c97)
+		background gradient(top, #3b2a95, #3e2c97)
+	.user-info
+		margin-bottom space * 2
+	.avatar
+		width 48px
+		height 48px
+		border-radius 24px
+		background logo-bg-color
+		text-align center
+		.icons
+			font-size 48px
+			color #c2b3e7
+	.links
+		padding 5px 0
+		font-size 0
+		line-height 16px
+	.link
+		display inline-block
+		width 16px
+		height 16px
+		border-radius 8px
+		background #352975
+		vertical-align middle
+		 .icons
+				font-size 16px
+				color #e6e6e6
+		&.active
+			.icons
+				color text-color-highlight
+		& + .separation
+			margin 0 20px
+			font-size 16px
+			vertical-align middle
+			color #5c709e
+			cursor default
+	.menu
+		.el-submenu__title
+			padding 0 !important
+		.el-submenu__icon-arrow
+			color text-color-nav
+		&.el-menu, .el-menu
+			background transparent !important
+			border 0 none !important
+		.with-sub-menu, .menu-item
+			&.is-active
+				color text-color-white
+				.menu-item, .icons, .el-submenu__icon-arrow
+					color text-color-white
+		.menu-item, .sub-menu-item
+			display block
+			height 56px
+			line-height 56px
+			overflow hidden
+			white-space nowrap
+			text-overflow ellipsis
+			position relative
+			&:hover, &:focus
+				background menu-bg-color-hover
+				color current-bg-color !important
+				.icons
+					color current-bg-color
+				& + .el-submenu__icon-arrow
+					color current-bg-color
+		.menu-item
+			padding 0 aside-space !important
+			font-size font-size-bigger
+			background menu-bg-color
+			color text-color-nav
+			.icons
+				font-size 20px
+				margin-right space
+				color text-color-nav
+		.sub-menu-item
+			padding 0 aside-space 0 aside-space + 35px !important
+			cursor pointer
+			color text-color-sub-nav
+			&.is-active
+				background menu-bg-color-hover
+				color current-bg-color
+				&:before
+					content ''
+					position absolute
+					height 100%
+					width 5px
+					left 0
+					background current-bg-color
+

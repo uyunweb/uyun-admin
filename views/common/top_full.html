@@ -1,0 +1,20 @@
+<!-- 进入页面前loading -->
+{% if config.useHtmlLoading %}
+<div id="js_html_loading" class="html_loading"><div class="spinner"><i></i></div></div>
+{% endif %}
+
+<!-- 接收node端的配置隐藏域 -->
+<input id="js_backConfig" type="hidden" value="{{config|json}}">
+
+<!-- 检测IE版本 -->
+<script type="text/javascript">
+	(function(){
+		var appName = navigator.appName;
+		var version = navigator.appVersion;
+		if(appName==="Microsoft Internet Explorer" || appName==="Netscape"){
+			if(version.indexOf("MSIE 6.0") > 0 || version.indexOf("MSIE 7.0") > 0 || version.indexOf("MSIE 8.0") > 0 || version.indexOf("MSIE 9.0") > 0){
+				window.location.href="{{config.dir}}/forie";
+			}
+		}
+	}());
+</script>

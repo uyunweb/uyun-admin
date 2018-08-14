@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{{title}}</title>
+<link rel="stylesheet" type="text/css" href="{{config.dns}}/css/page_error.css" />
+<script type="text/javascript">
+(function(){
+	var loginUrl = '{{config.loginUrl}}';
+	var loginUrlAutoLogout = '{{config.loginUrl}}?logout=1';
+	var backType = '{{query.type}}';
+
+	if(backType == -4) {
+		// -4 - 立即强制返回登录页面
+		window.location.href = loginUrl;
+	} else if(backType == -5) {
+		// -4 - 立即强制返回登录页面，logout=-1参数
+		window.location.href = loginUrlAutoLogout;
+	}
+})();
+</script>
+</head>
+<body>
+<div class="wrapper_error">
+	<img class="error_code" src="{{config.dns}}/img/401.png">
+	<h4>对不起，访问出错啦！</h4>
+	{% if errorCode[query.code] %}
+		<h5><font id="js_err_message">{{errorCode[query.code]}}</font></h5>
+	{% else %}
+		<h5><font id="js_err_message">未知错误</font></h5>
+	{% endif %}
+	
+	{% if query.type==-1 %}
+		<p><font id="js_second">5</font> 秒后即将 <a href="{{config.loginUrl}}">返回登录页面</a>！</p>
+	{% elseif query.type==-2 %}
+		<p><font id="js_second">5</font> 秒后即将 <a href="{{config.host+config.dir}}">返回首页</a>！</p>
+	{% elseif query.type==-3 %}
+		<p><font id="js_second">5</font> 秒后即将 <a href="{{config.loginUrl}}?logout=1">返回重新登录</a>！</p>
+	{% else %}
+		<p>您可以 <a href="javascript:history.back(-1);">重试</a> 或 <a href="{{config.loginUrl}}?logout=1">重新登录</a>！</p>
+	{% endif %}
+	
+</div>
+<script type="text/javascript">
+(function(){
+
+	var hostUrl = '{{config.host+config.dir}}';
+	var loginUrl = '{{config.loginUrl}}';
+	var loginUrlAutoLogout = '{{config.loginUrl}}?logout=1';
+	var backCode = '{{query.code}}';
+	var backType = '{{query.type}}';
+	var backMsg = '{{query.msg}}';
+	var backUrl = '';
+
+	if(backType == -1){
+		// -1 - 5秒后强制返回登录页面
+		backUrl = loginUrl;
+		setTimeout(secondTime, 1000);
+	} else if(backType == -2) {
+		// -2 - 5秒后强制返回首页
+		backUrl = hostUrl;
+		setTimeout(secondTime, 1000);
+	} else if(backType == -3) {
+		// -3 - 5秒后强制返回登录页面，logout=-1参数
+		backUrl = loginUrlAutoLogout;
+		setTimeout(secondTime, 1000);
+	} else {
+		// 显示当前页 不进行任何处理
+	}
+	if(backMsg){
+		// 显示当前页
+		document.getElementById("js_err_message").innerHTML = backMsg;
+	}
+
+	function secondTime(){
+		var secondDom = document.getElementById("js_second");
+		var secondNum = Number(secondDom.innerHTML);
+		if(!secondNum){
+			document.getElementById("js_second").innerHTML = "0";
+			setTimeout(function(){
+				window.location.href = backUrl;
+			}, 1000);
+		} else {
+			secondNum -- ;
+			document.getElementById("js_second").innerHTML = secondNum;
+		}
+		setTimeout(secondTime, 1000);
+	}
+})();
+</script>
+</body>
+</html>

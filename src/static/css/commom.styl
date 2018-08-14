@@ -1,0 +1,245 @@
+html, body
+	height 100%
+	margin 0
+	padding 0
+body
+	font font-size-default/1.5 "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
+	color text-color-default
+	background body-bg-color
+h1, h2, h3, h4, h5, h6, dl, dt, dd, ul, ol, li, th, td, p, blockquote, pre, form, fieldset, legend, input, button, textarea, hr
+	margin: 0;
+	padding: 0;
+b
+	font-weight 500
+a
+	color text-link
+	text-decoration none
+	cursor pointer
+	&:hover, &:focus
+		color text-link-hover
+	&:focus
+		outline none
+	&.disabled
+		color text-color-light !important
+		cursor not-allowed
+		.icons
+			color text-color-light !important
+input
+	border none
+	outline none
+	/*清除移动端默认的表单样式*/
+	-webkit-appearance none
+/*safari 下 table的滚动条*/
+.box
+	::-webkit-scrollbar
+		-webkit-appearance none
+		width 12px
+	::-webkit-scrollbar-thumb
+		border-radius 12px
+		background-color rgba(0,0,0,0.3)
+		-webkit-box-shadow 0 0 1px rgba(255,255,255,0.3)
+textarea
+	resize none
+
+ul, ol, li
+	list-style none
+table
+	border-collapse collapse
+p
+	display block
+	-webkit-margin-before 0em !important
+	-webkit-margin-after 0em !important
+	-webkit-margin-start 0px !important
+	-webkit-margin-end 0px !important
+button
+	outline-style none
+	border 0
+
+/* 重置vconsole样式 ycx add on 2017年9月6日17:55:16*/
+#__vconsole
+	text-align:left;
+
+.el-pagination
+	margin-top space * 2
+	&:before, &:after
+		display none
+
+.region-selector
+	input
+		height 30px !important
+	&.level-2, &.level-3, &.level-4
+		.el-select
+			box-sizing border-box
+			& + .el-select
+				padding-left 0.1rem
+	&.level-2
+		.el-select
+			width 50%
+	&.level-3
+		.el-select
+			width 33.3%
+	&.level-4
+		.el-select
+			width 25%
+
+.selector-in-panel
+	border-bottom 1px solid border-color-default
+	&.panel-header
+		border-bottom 0 none
+	.panel-title
+		white-space nowrap
+		overflow hidden
+		text-overflow ellipsis
+	> a
+		line-height 40px
+	&.select-all
+		> .region-selector
+			margin-left 40px
+		> a
+			width 40px
+			border-right 1px solid border-color-default
+			float left
+			text-align center
+			box-sizing border-box
+	.region-selector
+		font-size 0
+		.el-select
+			margin 0
+			box-sizing border-box
+			& + .el-select, &.float-right
+				border-left 1px solid border-color-default
+			.el-input__inner
+				border 0 none
+				height 40px !important
+	.l-equant-2
+		.el-select
+			width 50%
+	.l-equant-3
+		.el-select
+			width: 33.33%
+
+.no-border
+	border-left 1px solid border-color-default
+	.el-input__inner
+		border 0 none !important
+		height 40px !important
+.half-width
+	width 50%
+
+.selector-in-form
+	.region-selector
+		font-size 0
+		.el-select
+			margin 0
+			box-sizing border-box
+			& + .el-select
+				padding-left space
+
+.highlight-text
+	color text-color-highlight
+.color-less-text
+	color text-color-light
+.error-text
+	color color-error
+a.error-text
+	color rgba(color-error, 0.7)
+	&:hover
+		color color-error
+
+.font-bold
+	font-weight font-weight-bold
+
+.fade-enter
+	opacity 0
+.fade-leave
+	opacity 1
+.fade-enter-active
+	transition 0.3s
+.fade-leave-active
+	opacity 0
+	transition 0.3s
+
+.no-padding
+	padding 0 !important
+
+.deal-with
+	display inline-block
+	padding 0 1em
+	&:first-child
+		padding-left 0
+	&:last-child
+		padding-right 0
+.school-filter
+	margin-bottom 10px
+	.el-radio-group
+		width 100%
+		span
+			padding 9px 0
+	.el-radio-button__inner
+		display block
+
+.inline-block
+	display inline-block !important
+.display-block
+	display block !important
+
+.table-btn
+	& + .table-btn
+		margin-left 5px
+
+.link-space
+	margin-right 0.1rem
+
+.font-weight-normal
+	font-weight font-weight-normal !important
+
+.blank
+	padding 50px 0 !important
+	text-align center
+	color text-color-light
+.for-re-try
+	position relative
+.re-try
+	position absolute
+	top 0
+	bottom 0
+	left 0
+	right 0
+	z-index 100
+	background rgba(255,255,255, 0.6)
+	.blank
+		position absolute
+		left 50%
+		bottom -50px
+		transform translateX(-50%)
+
+
+
+
+
+.width-half
+	width 50%
+.width-100
+	width 100px
+.width-200
+	width 200px
+.width-300
+	width 300px
+.width-500
+	width 500px
+
+.width-half-important
+	width 50%!important
+.width-100-important
+	width 100px!important
+.width-200-important
+	width 200px!important
+.width-300-important
+	width 300px!important
+.width-500-important
+	width 500px!important
+
+.user-face-min
+	width 24px
+	height 24px
+	border-radius 50%

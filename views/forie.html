@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>不兼容的浏览器</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		html, body {
+			background: #2a3c54;
+		}
+		
+		#forie {
+			position: absolute;
+			width: 1000px;
+			height: 352px;
+			left: 50%;
+			top: 50%;
+			margin-top: -176px;
+			margin-left: -500px;
+		}
+		
+		#forie img {
+			display: block;
+			width: 100%;
+		}
+		
+		#forie .down {
+			display: inline-block;
+			width: 100px;
+			height: 120px;
+			position: absolute;
+			bottom: 24px;
+			cursor: pointer;
+			background: rgba(255, 255, 255, 0);
+		}
+		
+		#forie ._google {
+			left: 440px;
+		}
+		
+		#forie ._ie {
+			left: 586px;
+		}
+		
+		#forie ._firefox {
+			left: 740px;
+		}
+		
+		#forie ._safari {
+			left: 890px;
+		}
+	</style>
+</head>
+<body>
+	<div id="forie">
+		<img src="{{config.dns}}/img/forie.png" alt="请升级你的浏览器"/>
+		<a href="https://www.google.cn/chrome/" title="下载谷歌浏览器" target="_blank" class="down _google"></a>
+		<a href="https://browser.360.cn/ee/" title="下载360极速浏览器" target="_blank" class="down _ie"></a>
+		<a href="http://www.firefox.com.cn/" title="下载火狐浏览器" target="_blank" class="down _firefox"></a>
+		<a href="https://www.apple.com/cn/safari/" title="下载苹果浏览器" target="_blank" class="down _safari"></a>
+	</div>
+<script>
+(function () {
+	var appName = navigator.appName; //浏览器的正式名称
+	var version = navigator.appVersion; //浏览器的版本号
+	if (appName == "Microsoft Internet Explorer" || appName == "Netscape") {
+		if (version.indexOf("MSIE 6.0") > 0 || version.indexOf("MSIE 7.0") > 0 || version.indexOf("MSIE 8.0") > 0 || version.indexOf("MSIE 9.0") > 0) {
+		} else {
+			window.location.href="/";
+		}
+	}
+}());
+</script>
+</body>
+</html>

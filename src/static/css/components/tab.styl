@@ -1,0 +1,49 @@
+.tab
+	.el-tabs__header
+		background bg-color-white
+		margin-bottom space * 2
+	&.tab-panel
+		margin-bottom space * 2
+		background bg-color-white
+		.el-tabs__header
+			margin 0
+			border-bottom 1px solid border-color-default
+		.el-tabs__content
+			padding space * 3
+	.el-tabs__active-bar
+		display none
+
+.tab-page, .tab
+	.tab-label, .el-tabs__item
+		padding 0 space * 3 !important
+		height 40px
+		line-height 40px
+		font-size font-size-bigger
+		color text-color-default
+		&.is-active
+			background bg-color-current
+			color text-color-white
+
+.tab-page
+	margin-bottom space * 2
+	background bg-color-white
+	&:after
+		background #dfe4ed
+	.tab-label
+		display inline-block
+		cursor pointer
+		&.is-active
+			background bg-color-current
+			z-index 2
+.tab-page-content
+	overflow hidden
+.tab-page, .is-active
+	position relative
+	&:after
+		content ''
+		position absolute
+		bottom 0
+		left 0
+		width 100%
+		height 2px
+		z-index	1

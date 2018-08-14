@@ -1,0 +1,200 @@
+.for-roles
+	.l-table
+		.panel
+			margin-bottom 0
+	.region-selector
+		margin-top -1px
+	.app-list
+		margin-bottom space * 2
+		.app-title
+			margin-bottom space
+			font-size font-size-big
+			font-weight font-weight-bold
+		&.mini
+			margin-bottom space
+			.app-title
+				margin-bottom 0
+				font-size font-size-default
+				color text-color-default
+				cursor default
+	.hide-text
+		display block
+		margin-right 50px
+		white-space nowrap
+		overflow hidden
+		text-overflow ellipsis
+	.role-list
+		.icons-user
+			margin-right 6px
+			font-size 24px
+			color rgba(text-color-light, 0.6) !important
+		.list-item
+			padding 0
+			cursor default
+			font-size font-size-big
+			color text-color-light
+	.app-in-role
+		margin 0 -20px
+	.add-role
+		.el-input__inner
+			height 40px
+		.l-table
+			&:first-child
+				.l-cell
+					padding-bottom 0
+			.l-cell
+				width 50%
+				&.small
+					width 20%
+				&.mini
+					width 15%
+			& + .l-table
+				margin-top 15px
+		.edit-role
+			& + .edit-role
+				margin-left space
+			.icons
+				font-size 14px
+				font-weight font-weight-bold
+		.el-form-item__error
+			margin-top -10px
+	.mini
+		.list-item
+			line-height 26px
+			white-space nowrap
+			overflow hidden
+			text-overflow ellipsis
+			font-weight font-weight-normal
+			font-size font-size-default
+		.role-list
+			.icons-user
+				font-size 18px
+				margin-right 0
+
+	.l-equant-3
+		.el-select, .slot-selector
+			width 33.3%
+		.slot-selector
+			display inline-block
+			border-left 1px solid border-color-default
+			box-sizing border-box
+			.el-select
+				width 100%
+	.l-equant-2
+		.el-select
+			width 50%
+	.reminder
+		padding	space
+		font-size	font-size-big
+		color text-color-highlight
+		& + .tree-container
+			border-top 1px solid border-color-default
+	.overflow-y
+		overflow auto
+		overflow-x hidden
+	.period-grade
+		line-height 30px
+		padding 5px 0
+
+
+
+.collapse-list
+	margin 0 !important
+	border 0 none
+	overflow hidden
+	color text-color-default
+	.blank
+		height 58px
+		line-height 58px
+		padding 0 !important
+	.list-item
+		padding-left 10px
+	.el-collapse-item__header
+		height auto
+		line-height inherit
+		background transparent
+		border 0 none
+	.el-collapse-item__arrow
+		display none
+	.el-collapse-item__wrap
+		margin 0 -20px
+		position relative
+		z-index 100
+	.el-collapse-item__header
+		font-size font-size-big
+		font-weight font-weight-bold
+		color text-color-dark
+	.icons-spread
+		display inline-block
+	.icons-fold
+		display none
+	.open
+		.icons-spread
+			display none
+		.icons-fold
+			display inline-block
+	.selected
+		.icons
+			color text-color-white
+			background transparent !important
+		.el-collapse-item__header
+			color text-color-white !important
+	.el-collapse-item__content
+		padding space space space 30px
+		// max-height 400px
+		font-weight font-weight-normal
+		color text-color-default
+		// overflow auto
+		.blank
+			padding 20px
+
+// group in roles and study group style
+.for-roles, .for-agency
+	.editable
+		position absolute
+		right 0
+		top 0
+		.icons
+			padding 6px
+			font-size 16px
+			color text-color-light
+			border-radius 20px
+			font-weight font-weight-normal
+			&:hover, &:focus
+				color text-color-main-hover
+	.group-type
+		margin-left -15px
+		width 50%
+		border-right 1px solid border-color-default
+	.list-item
+		padding 0 space * 2
+		line-height 40px
+		cursor pointer
+		font-size font-size-big
+		position relative
+		transition all .2s cubic-bezier(.645,.045,.355,1)
+		&:before
+			content ''
+			position absolute
+			left 0
+			top 0
+			bottom 0
+			width 4px
+		&:hover, &:focus
+			background optional-bg-color
+		&.selected
+			background bg-color-main
+			color text-color-white
+			&:before
+				background bg-color-current
+			.icons
+				color text-color-white
+				&:hover, &:focus
+					background bg-color-white
+					color text-color-main-hover
+	.group-list
+		margin 0 -20px
+		.list-item
+			font-weight font-weight-bold
+		.editable
+			right space

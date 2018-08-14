@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>404</title>
+<link rel="stylesheet" type="text/css" href="{{config.dns}}/css/page_error.css" />
+</head>
+<body>
+<div class="wrapper_error">
+	<img class="error_code" src="{{config.dns}}/img/404.png">
+	<h4>对不起，您要访问的页面不存在或已经删除！</h4>
+    {% if config.env!=="production" %}
+		{% if message %}
+			<h5>{{message}}</h5>
+		{% else %}
+			<h5>{{error}}</h5>
+		{% endif %}
+		<p>您可以 <a href="/">返回首页</a></p>
+    {% else %}
+        <p>您可以 <a href="/">返回首页</a></p>
+        <p><span>{{message}}</span></p>
+        <p><span>{{error|json}}</span></p>
+	{% endif %}
+</div>
+</body>
+</html>

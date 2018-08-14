@@ -1,0 +1,11 @@
+/.idea
+/node_modules
+/.svn
+/debug.log
+/*.zip
+/.project
+/yarn-error.log
+/logs
+/.logs
+/build
+/config/config.*.js

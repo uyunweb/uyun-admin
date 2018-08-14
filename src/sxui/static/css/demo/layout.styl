@@ -1,0 +1,166 @@
+.page-container
+	height 100%
+	.page-aside
+		width nav-width
+		position absolute
+		left 0
+		top 0
+		bottom 0
+	.el-breadcrumb
+		padding-bottom space * 1.5
+	.page-content
+		height 100%
+		margin-left nav-width
+		padding space * 3 space * 2
+		box-sizing border-box
+		overflow auto
+.clearfix
+	*zoom 1
+	&:after
+		content "."
+		display block
+		height 0
+		clear both
+		visibility hidden
+
+.float-right
+	float right !important
+
+.float-left
+	float left !important
+
+.align-left
+	text-align left !important
+
+.align-center
+	text-align center !important
+
+.align-right
+	text-align right !important
+
+.cell
+	display table-cell
+
+.panel
+	margin-bottom space * 2
+	background bg-color-white
+	&:last-child
+		margin-bottom 0
+	.panel-header
+		padding 0 space *3
+		height 40px
+		line-height 40px
+		overflow hidden
+		& + .panel-content
+			border-top 1px solid border-color-default
+	.panel-title
+		font-size font-size-big
+		font-weight font-weight-bold
+	.panel-content
+		padding space *3
+	&.panel-small
+		.panel-header
+			padding 0 space * 1.5
+		.panel-content
+			padding space * 2
+.panel, .tab-panel
+	.operate-table
+		@extend .clearfix
+		margin-top -5px
+		margin-bottom space * 1.5
+		line-height 40px
+		&.operations-only
+			line-height inherit
+	.operations
+		@extend .float-right
+	.operation
+		display inline-block
+		font-size font-size-big
+		color text-color-default
+		&:hover, &:focus
+			color text-color-main-hover
+		& + .operation
+			margin-left space * 2
+
+l-space = space * 1.5
+.l-table
+	display table
+	width 100%
+	table-layout fixed
+	& + .l-table
+		margin-top l-space * 2
+	> .l-cell
+		display table-cell
+	&[class*="l-equant-"], &[class*="l-aside-"]
+		width auto
+		display block
+		table-layout auto
+		@extend .clearfix
+		> .l-cell
+			float left
+			display block
+			box-sizing border-box
+	&.l-equant-2
+		> .l-cell
+			width 50%
+
+	&.l-equant-3
+		> .l-cell
+			width calc(100% / 3)
+
+	&.l-equant-4
+		> .l-cell
+			width 25%
+	&.l-aside-1
+		> .aside
+			width 25%
+			& + .l-cell
+				width 75%
+	&.l-aside-2
+		> .aside
+			width 20%
+		>.l-cell:last-child
+				width 60%
+
+	&.align-middle
+		> .l-cell
+			vertical-align middle
+
+	&.spacing
+		border-spacing l-space
+		&[class*="l-equant-"], &[class*="l-aside-"]
+			margin-left - l-space
+			margin-bottom - l-space
+			> .l-cell
+				box-sizing border-box
+				padding 0 0 l-space l-space
+
+.l-cell
+	display table-cell
+.inlineBlock
+	display inline-block
+
+@media screen and (max-width: 1600px)
+	aside-width-1 = 280px
+	aside-width-2 = 560px
+	.l-table
+		&.l-aside-1
+			> .aside
+				width aside-width-1
+			>.l-cell:last-child
+				width "calc(100% - %s)" % aside-width-1
+		&.l-aside-2
+			> .aside
+				width "calc(%s / 2)" % aside-width-2
+			>.l-cell:last-child
+				width "calc(100% - %s)" % aside-width-2
+		&.spacing
+			&[class*="l-aside-"]
+				margin-left - l-space
+				margin-bottom - l-space
+				> .l-cell
+					box-sizing border-box
+					padding 0 0 l-space l-space
+
+
+

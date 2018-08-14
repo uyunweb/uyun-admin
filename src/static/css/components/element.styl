@@ -1,0 +1,336 @@
+body
+	.el-table
+		font-size font-size-samll
+		color text-color-default
+		th,td
+			padding 8px 0
+			position static
+		th
+			background-color #edf0f7
+			border-color #d7dae3
+			.cell
+				white-space nowrap
+		.ascending,
+		.descending
+			cursor pointer
+	.el-table__body-wrapper
+		padding 0 1px 0 0
+	.el-table__headeer
+		.cell
+			padding 0 15px
+			font-weight bold
+	.el-table__body tr
+		&.hover-row, &:hover
+			> td
+				background-color optional-bg-color !important
+				border-right-color #d7dae3
+
+
+	//dialog
+	.el-dialog__header
+		padding 8px 15px
+		border-bottom 1px solid color-light
+		.el-dialog__title
+			display inline-block
+			font-size font-size-bigger
+			width 80%
+		.el-dialog__headerbtn
+			top 12px
+			i
+				&:hover
+					color #df1313
+	.el-dialog__body
+		padding 30px
+	.dialog-footer
+		padding 0 8px 14px
+
+	//message
+	.el-message-box__wrapper
+		.el-message-box__btns
+			.el-button--small
+				padding 0
+				height button-default
+				width 126px
+				background bg-color-main
+				border-color border-color-main
+				color text-color-white
+				&:hover,
+				&:active
+					background bg-color-main-hover
+					border-color border-color-focus
+
+	//button
+	.el-button
+		border-radius 2px
+		&.is-disabled
+			border-color color-disabled !important
+			background color-disabled !important
+			color text-color-white !important
+	.el-button--primary
+		background bg-color-main
+		border-color border-color-focus
+		&:hover,
+		&:active,
+		&:focus
+			background bg-color-main-hover
+			border-color border-color-focus
+			color #fff
+	.el-button--large
+		height button-big
+		line-height button-big
+		width 170px
+
+	.el-button.el-button--text
+		font-size font-size-default
+		background #fff !important
+		color color-main !important
+
+	.el-table__row
+		.el-button
+			margin-right 10px
+		.el-button+.el-button
+			margin-left 0
+
+	//pagination
+	.el-pager
+		li
+			border 1px solid color-grey
+			padding 0 2px
+			&.active,&:hover
+				background-color bg-color-main
+				border-color border-color-focus
+				color color-white
+			&.active+li
+				border 1px solid #d1dbe5
+			&:hover
+				color color-white
+			&:nth-child(n+2)
+				margin-left 8px
+	.el-pagination
+		text-align center
+		color text-color-default
+		[class*=el-pagination]
+			color text-color-default
+		.number
+			box-sizing border-box
+		.number.first
+			padding 0 10px
+			font-weight 500
+		.number.disabled
+			color #b4bccc
+			background-color #fff
+			cursor not-allowed
+			border-color #ddd
+
+	//inputs
+	.el-input__icon
+		line-height 30px
+	.el-input__inner, .el-textarea__inner
+		padding (space / 2) space
+		border-radius 2px
+		font-size font-size-default
+		&:focus
+			border-color border-color-focus !important
+	.el-input__inner
+		//line-height 30px
+		//height 30px
+		//padding 0 space
+		&.selected
+			&:active
+			&.hover
+			&:hover
+				background-color bg-color-main
+	.el-textarea__inner
+		height 100px
+	.is-focus
+		.el-input__inner
+			border-color border-color-focus !important
+	.el-select
+		margin-right 0.1rem
+	.el-select-dropdown
+		border-color border-color-focus
+		li
+			&:active
+			&.hover
+			&:hover
+				background-color optional-bg-color
+			&.selected
+				background-color bg-color-main
+				color text-color-white
+		&.is-multiple
+			.el-select-dropdown__item.selected
+				color text-color-main-hover
+				background-color bg-color-white
+	.el-radio__input.is-checked
+		.el-radio__inner
+			background-color bg-color-main
+			border-color border-color-focus
+	.el-checkbox__input.is-checked
+		.el-checkbox__inner
+			background-color bg-color-main
+			border-color border-color-focus
+	.el-picker-panel
+	.el-time-panel
+		border-color border-color-focus
+	.el-switch.is-checked
+		.el-switch__core
+			border-color border-color-focus
+			background bg-color-main
+	.el-checkbox__inner
+		&:hover
+			border-color border-color-focus
+	.el-input__suffix, .el-input__prefix
+		.icons
+			font-size 12px !important
+	.el-input__suffix
+		right 0
+		width 30px
+		cursor pointer
+		&:hover
+			color text-color-main-hover
+	.el-input__prefix
+		left space
+		.el-input__icon
+			margin-left - 5px
+	.el-select
+		.el-input
+			font-size font-size-default
+.icons-box
+	display inline-block
+	width 200px
+	position relative
+	.icons-input
+		width 100%
+		height button-default
+		padding 0 30px 0 space
+		border 1px solid border-color-default
+		line-height button-default
+		box-sizing border-box
+		transition border-color .2s cubic-bezier(.645,.045,.355,1)
+		border-radius 2px
+		color #5a5e66
+		&:hover
+			border-color boder-color-hover
+		&:focus
+			border-color border-color-focus
+			& + .icons
+				color text-color-default
+		&::-webkit-input-placeholder
+			color text-color-light
+		&:-moz-placeholder
+			color text-color-light
+		&:-ms-input-placeholder
+			color text-color-light
+	.icons
+		font-size 12px !important
+		position absolute
+		right 10px
+		top 50%
+		margin-top -6px
+		cursor pointer
+		color text-color-light
+		&:hover, &:focus
+			color text-color-main-hover !important
+	&.small
+		.icons-input
+			height button-small
+			line-height button-small
+	&.big
+		.icons-input
+			height button-big
+			line-height button-big
+
+.edit-orgin
+	.el-dialog--small
+		width 890px
+.el-form-item__content
+	.el-select
+		margin 0
+		width 100%
+.icons-plus
+	font-size 14px
+.el-popper[x-placement^=bottom]
+	.popper__arrow
+		left 20% !important
+		border-bottom-color: border-color-focus
+		-webkit-transform none
+		transform none
+		&:after
+			top 2px
+
+.el-radio
+	&:hover
+		.el-radio__inner
+			border-color border-color-focus
+	.el-radio__input
+		&.is-checked +.el-radio__label
+			color text-color-default
+.el-radio-button__inner
+		&:hover
+			color text-color-main-hover
+.el-radio-button__orig-radio
+	&:checked + .el-radio-button__inner
+		background bg-color-main
+		border-color border-color-focus
+		-webkit-box-shadow -1px 0 0 0 bg-color-main
+		box-shadow -1px 0 0 0 bg-color-main
+
+.el-checkbox
+	&:hover
+		.el-checkbox__inner
+			border-color border-color-focus
+	.el-checkbox__input
+		&.is-focus .el-checkbox__inner
+			border-color border-color-focus
+		&.is-checked +.el-checkbox__label
+			color text-color-default
+
+//form
+.el-form
+	.el-form-item__label
+		font-size font-size-default
+	.el-form-item__content
+		.el-input
+			font-size font-size-default
+.el-form-item__content::after, .el-form-item__content::before,.el-form-item::after, .el-form-item::before
+	display none
+	height 0
+	width 0
+
+.el-input-number.is-controls-right .el-input__inner
+	text-align left
+
+.el-loading-mask
+	background-color rgba(255, 255, 255, .6)
+
+.defualt-size
+	.el-input__inner
+		height button-small !important
+
+// upload
+.el-upload__tip_img
+	text-align left
+	cursor default
+	img
+		cursor pointer
+		margin-top 10px
+		max-width 90px
+		max-height 90px
+.el-upload__tip_img_default
+	img
+		cursor default
+
+.el-upload-list--picture-card .el-upload-list__item, .el-upload--picture-card
+	width 90px
+	height 90px
+.el-upload--picture-card
+	line-height 94px
+	margin-bottom 15px
+	i
+		font-size 24px
+.el-upload-list--picture-card .el-upload-list__item-thumbnail
+	height auto
+
+// tabs
+.el-tabs__header
+	margin: 0 0 30px;

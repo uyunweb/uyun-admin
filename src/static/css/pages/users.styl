@@ -1,0 +1,55 @@
+.for-users
+	.l-table
+		.panel
+			margin-bottom 0
+
+	.for-students
+		.region-selector
+			display inline-block
+		.el-select
+			width 110px
+	.mini-szie
+		&.el-select
+			width 100px
+	.hide-search
+		.icons-box
+			display none
+.filter
+	display inline-block
+	.el-input__inner
+		height 30px !important
+.import
+	width 100%
+	> .el-dialog
+		min-width 690px
+	.upload
+		padding 18px 0 48px
+	.notice
+		position relative
+		padding-left 1.5em
+		padding-bottom 0.5em
+	.index
+		position absolute
+		left 0
+	.el-dialog__header
+		> div
+			@extends .clearfix
+			line-height 24px
+
+// user and class details style
+.info-title
+	font-size font-size-big
+	font-weight font-weight-bold
+	margin-bottom space * 1.8
+.infos
+	margin-bottom space * 4
+	.info-list
+		@extends .clearfix
+	.info-item
+		float left
+		width 16.66%
+		min-width 220px
+		padding-right space
+		margin-bottom space * 1.8
+		box-sizing border-box
+
