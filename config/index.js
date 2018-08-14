@@ -11,7 +11,7 @@ if(process.env.NODE_ENV === "development"){
 } else if(process.env.NODE_ENV === "beta") {
 	siteConfig = require('./config.beta');
 } else {
-	siteConfig = require('./config.master');
+	siteConfig = require('./config.prod');
 }
 
 // 覆盖lookapi配置，目的是减少复用，线上可以灵活的决定是否保存api
