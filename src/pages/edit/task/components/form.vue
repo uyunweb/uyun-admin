@@ -36,11 +36,9 @@
 			<el-form-item label="缩略图">
 				<el-upload
 					action="http://upload-z2.qiniup.com"
-					:show-file-list="isShowFileList"
-					:file-list="fileList"
-					:on-success="handleAvatarSuccess"
-					:on-error="handleError"
-					:before-upload="beforeAvatarUpload"
+					:show-file-list="isShowCoverImageFileList"
+					:file-list="coverImageFileList"
+					:on-success="onSuccessCoverImage"
 					:data="postData">
 					<el-input placeholder="只能上传jpg/png文件，且不超过500kb" v-model="form.cover" class="width-500" disabled>
 						<el-button slot="append" icon="el-icon-search" type="primary">点击上传</el-button>
@@ -107,28 +105,21 @@
 							</template>
 							<!-- type=1 图片 -->
 							<template v-else-if="item.type === 1">
-								<el-upload
-									multiple
-									action="http://upload-z2.qiniup.com"
-									list-type="picture-card"
+								<upload
+									:index="index"
 									:file-list="item.img_list"
-									:on-preview="handlePictureCardPreview"
-									:on-remove="handleRemove"
-									:data="postData">
-									<i class="el-icon-plus"></i>
-								</el-upload>
+									:on-success="onSuccessStepImage"
+									:on-remove="onRemoveStepImage">
+								</upload>
 							</template>
 							<!-- type=2 二维码 -->
 							<template v-else-if="item.type === 2">
-								<el-upload
-									action="http://upload-z2.qiniup.com"
-									list-type="picture-card"
-									:file-list="item.﻿﻿code_list"
-									:on-preview="handlePictureCardPreview"
-									:on-remove="handleRemove"
-									:data="postData">
-									<i class="el-icon-plus"></i>
-								</el-upload>
+								<upload
+									:index="index"
+									:file-list="item.code_list"
+									:on-success="onSuccessStepCode"
+									:on-remove="onRemoveStepCode">
+								</upload>
 							</template>
 							<!-- type=3 超链接 -->
 							<template v-else-if="item.type === 3">
@@ -219,27 +210,20 @@
 				<el-input type="textarea" v-model="form.submit_text_example" placeholder="允许为空，最多500个字"></el-input>
 			</el-form-item>
 			<el-form-item label="审核示例图片">
-				<el-upload
-					multiple
-					action="http://upload-z2.qiniup.com"
-					list-type="picture-card"
+				<upload
 					:file-list="form.submit_img_example_list"
-					:on-preview="handlePictureCardPreview"
-					:on-remove="handleRemove"
-					:data="postData">
-					<i class="el-icon-plus"></i>
-				</el-upload>
+					:on-success="onSuccessImageExampleList"
+					:on-remove="onRemoveImageExampleList">
+				</upload>
 			</el-form-item>
 		</el-tab-pane>
 
-		<el-dialog :visible.sync="dialogVisible">
-			<img width="100%" :src="dialogImageUrl" alt="">
-		</el-dialog>
 	</el-tabs>
 </template>
 
 <script>
 	import Enums from '../../../../utils/enums';
+	import Upload from './upload';
 
 	export default {
 		props: {
@@ -258,16 +242,51 @@
 					title: "",
 					desc: ""
 				},
-				fileList: [],
-				isShowFileList: false,
-				dialogImageUrl: '',
-				dialogVisible: false,
+
+				// 上传缩略图
+				coverImageFileList: [],
+				isShowCoverImageFileList: false,
+
 				postData: {
 					token: ''
-				}
+				},
+				// 上传审核图片示例
+				onSuccessImageExampleList : (fileList) => {
+					console.log("-> onSuccessUpload");
+					console.log(fileList);
+					this.form.submit_img_example_list = fileList;
+				},
+				onRemoveImageExampleList : (fileList) => {
+					console.log("-> onRemoveUpload");
+					console.log(fileList);
+					this.form.submit_img_example_list = fileList;
+				},
+
+				// step_list_image
+				onSuccessStepImage : (fileList, index) => {
+					console.log("-> onSuccessStepImage");
+					console.log(fileList, index);
+					this.form.step_list[index].img_list = fileList;
+				},
+				onRemoveStepImage : (fileList, index) => {
+					console.log("-> onRemoveStepImage");
+					console.log(fileList, index);
+					this.form.step_list[index].img_list = fileList;
+				},
+				onSuccessStepCode : (fileList, index) => {
+					console.log("-> onSuccessStepImage");
+					console.log(fileList, index);
+					this.form.step_list[index].code_list = fileList;
+				},
+				onRemoveStepCode : (fileList, index) => {
+					console.log("-> onRemoveStepImage");
+					console.log(fileList, index);
+					this.form.step_list[index].code_list = fileList;
+				},
 			};
 		},
 		components: {
+			Upload
 		},
 
 		created() {
@@ -287,51 +306,15 @@
 					}
 				});
 			},
-			handleAvatarSuccess(res, file) {   //上传成功后在图片框显示图片
+			//上传成功后在图片框显示图片
+			onSuccessCoverImage(res, file) {
 				this.form.cover ='http://pc254qwlj.bkt.clouddn.com/'+ res.key;
 				setTimeout(() => {
-					this.isShowFileList = false;
-					this.fileList = [];
+					this.isShowCoverImageFileList = false;
+					this.coverImageFileList = [];
 				}, 500);
 			},
-			handleError(res) {   //显示错误
-				console.log(res);
-			},
-			beforeAvatarUpload(file) {    //在图片提交前进行验证
-				const isJPG = file.type === 'image/jpeg' || 'image/jpg';
-				const isPNG = file.type === 'image/png';
-				const isLt2M = file.size / 1024 / 1024 < 2;
 
-				let back = true;
-				if (!isJPG&&!isPNG) {
-					back = false;
-					this.$message.error('上传头像图片只能是 JPG/PNG 格式!');
-				}
-				if (!isLt2M) {
-					back = false;
-					this.$message.error('上传头像图片大小不能超过 2MB!');
-				}
-				if (!this.postData.token){
-					back = false;
-					this.$message.error('未正确获取到上传token，请稍后再试。');
-				}
-				if (back) {
-					this.isShowFileList = true;
-				}
-				return back;
-			},
-			onClickUploadImg(url) {
-				this.dialogImageUrl = url;
-				this.dialogVisible = true;
-				console.log("onClickUploadImg");
-			},
-			handleRemove(file, fileList) {
-				console.log(file, fileList);
-			},
-			handlePictureCardPreview(file) {
-				this.dialogImageUrl = file.url;
-				this.dialogVisible = true;
-			},
 			onClickAddStep(index) {
 				console.info(index);
 				// this.form.step_list.push(this.defaultStepObject);
