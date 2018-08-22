@@ -45,7 +45,7 @@
 					class="width-300"
 					@change="">
 				</el-input>
-				<el-button type="primary" icon="el-icon-search" size="small" style="margin-left: 10px;" plain>搜索</el-button>
+				<el-button type="primary" icon="el-icon-search" size="small" style="margin-left: 10px;">搜索</el-button>
 				<router-link to="/edit/task/create">
 					<el-button class="_right" type="success" icon="el-icon-search" size="small" plain>创建任务</el-button>
 				</router-link>
@@ -53,7 +53,7 @@
 
 			<div class="report-list">
 				<el-table class="topic-table" :data="tableData" border v-loading="loading" style="min-height: 400px;">
-					<el-table-column type="index" width="50"></el-table-column>user_nick_name
+					<el-table-column type="index" width="50"></el-table-column>
 					<el-table-column label="任务名称" min-width="240">
 						<template slot-scope="scope">
 							<a :href="'#/?id='+scope.row._id">{{scope.row.title}}</a>
@@ -62,11 +62,14 @@
 					<el-table-column prop="price" label="任务奖励"></el-table-column>
 					<el-table-column prop="task_num" label="任务次数"></el-table-column>
 					<el-table-column label="创建者" min-width="100">
-						<template slot-scope="scope" v-if="scope.row.user">
-							<a :href="'#/?id='+scope.row.user.id">
-								<template v-if="!scope.row.user.nick_name">无名氏</template>
-								<template v-else>{{scope.row.user.nick_name}}</template>
-							</a>
+						<template slot-scope="scope">
+							<template v-if="scope.row.user_login_name">{{scope.row.user_login_name}}</template>
+							<template v-else>
+								<router-link :to='{path: "/user/order/detail", query: {id:scope.row.user_id}}'>
+									<img v-if="scope.row.user_avatar_url" :src="scope.row.user_avatar_url" class="user-face-min" />
+									{{scope.row.user_nick_name || scope.row.user_id}}
+								</router-link>
+							</template>
 						</template>
 					</el-table-column>
 					<el-table-column label="创建时间" min-width="160">

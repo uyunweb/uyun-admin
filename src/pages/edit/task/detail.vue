@@ -41,7 +41,7 @@
 		methods: {
 			ajaxGetTaskDetail(id) {
 				// 获取任务详情
-				this.$ajax.gateway("/apis/getTaskDetailById", {
+				this.$ajax.gateway("/apis/getTaskDetail", {
 					id
 				}, (data) => {
 					if(data.code===200){
@@ -90,8 +90,6 @@
 						this.$message.error(data.message);
 					}
 				});
-
-
 			}
 		}
 	};

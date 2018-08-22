@@ -132,6 +132,36 @@ const enums = {
 		label: "内容审核员"
 	}],
 
+	// 订单类型
+	orderType: [{
+		value: 0,
+		label: "无效订单"
+	}, {
+		value: 1,
+		label: "进行中"
+	}, {
+		value: 2,
+		label: "待审核"
+	}, {
+		value: 3,
+		label: "已完成"
+	}, {
+		value: 4,
+		label: "审核失败"
+	}, {
+		value: 5,
+		label: "重新提交资料"
+	}, {
+		value: 6,
+		label: "已失效"
+	}, {
+		value: 7,
+		label: "已取消"
+	}],
+	orderTypeFull: [{
+		value: -1,
+		label: "-全部订单-"
+	}],
 };
 
 for(let key in enums){

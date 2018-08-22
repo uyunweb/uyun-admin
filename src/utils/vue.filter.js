@@ -27,27 +27,6 @@ Vue.filter('toFixed', function (val,num) {
 	}
 	return val;
 });
-Vue.filter('orderType', function (type) {
-	if(type===0){
-		return "无效订单";
-	} else if(type===1){
-		return "进行中";
-	} else if(type===2){
-		return "待审核";
-	} else if(type===3){
-		return "已完成";
-	} else if(type===4){
-		return "失败";
-	} else if(type===5){
-		return "重新提交资料";
-	} else if(type===6){
-		return "已失效";
-	} else if(type===7){
-		return "已取消";
-	} else {
-		return "未知订单";
-	}
-});
 Vue.filter('time', function (val) {
 	let hour=parseInt(val/3600);
 	let minute=parseInt((val%3600)/60);

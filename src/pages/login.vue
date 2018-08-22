@@ -1,7 +1,10 @@
 <template>
 	<div class="login_box">
 		<h2>uyun-admin-login</h2>
-		<div class="form_box">
+		<div v-if="isLogin" class="form_loading">
+			给力登录中 ...
+		</div>
+		<div v-else class="form_box">
 			<div class="_item">
 				<span class="el_icon"><i class="el-icon-message"></i></span>
 				<input type="text" v-model="form.account" placeholder="用户名">
@@ -24,6 +27,7 @@ import config from "../config";
 export default {
 	data() {
 		return {
+			isLogin: true,
 			form: {
 				account: "admin",
 				password: ""
@@ -31,11 +35,16 @@ export default {
 		};
 	},
 	created() {
-		if(Cookies.get(config.cookie.authKey)){
+		if(this.$route.query.logout){
+			// 强制退出登录
+			console.log("--> 强制退出登录：%s", this.$route.query.logout);
+			Cookies.remove(config.cookie.authKey);
+		} else if(Cookies.get(config.cookie.authKey)){
 			// 已登录用户
 			console.log("--> 已登录用户：%s", Cookies.get(config.cookie.authKey));
 			this.$router.push("/edit/task/list");
 		}
+		this.isLogin = false;
 	},
 	methods: {
 		onLogin() {
@@ -79,6 +88,13 @@ export default {
 		font-weight 100;
 		font-size 26px;
 		color #999;
+	}
+	.form_loading {
+		padding 90px 0;
+		text-align center;
+		color #ccc;
+		font-size 13px;
+		font-weight 100;
 	}
 	.form_box {
 		padding 0 60px;

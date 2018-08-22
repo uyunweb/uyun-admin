@@ -33,15 +33,15 @@ const Auths = {
 				// 获取cookie
 				let token = Cookies.get(config.cookie.authKey);
 				if(!token){
-					console.warn("--> 未获取到token，退出至错误页面。");
-					return Auth.failCode(3104, -3);
+					console.warn("--> 未获取到token，请重新登录。");
+					return Auth.failCode(3001, -3);
 				} else {
 					Auth.ajaxGetUserInfoByToken(token, function(error, userInfo){
 						if(error || typeof userInfo !== "object" || typeof userInfo._id !== "string"){
 							console.warn("--> ajaxGetUserInfoByToken fail");
 							console.info(error);
 							console.info(userInfo);
-							return Auth.failCode(3105, -3);
+							return Auth.failCode(3002);
 						} else {
 							console.info("--> ajaxGetUserInfoByToken success");
 							appStore.state.user = userInfo;
