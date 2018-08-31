@@ -24,7 +24,7 @@ const Auths = {
 		if(config.useHtmlLoading) Auth.removeHtmlLoading();
 
 		if(toMeta.mustLogin){
-			if (appStore.state.user && appStore.state.user._id) {
+			if (appStore.state.user && appStore.state.user.id) {
 				console.log("--> 用户已登录：%s", appStore.state.user);
 				next();
 			} else {
@@ -34,10 +34,10 @@ const Auths = {
 				let token = Cookies.get(config.cookie.authKey);
 				if(!token){
 					console.warn("--> 未获取到token，请重新登录。");
-					return Auth.failCode(3001, -3);
+					return Auth.failCode(3001, -5);
 				} else {
 					Auth.ajaxGetUserInfoByToken(token, function(error, userInfo){
-						if(error || typeof userInfo !== "object" || typeof userInfo._id !== "string"){
+						if(error || !userInfo || !userInfo.id){
 							console.warn("--> ajaxGetUserInfoByToken fail");
 							console.info(error);
 							console.info(userInfo);

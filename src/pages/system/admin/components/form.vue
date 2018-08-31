@@ -7,7 +7,7 @@
 			<el-input type="text" v-model="form.password" class="width-half" placeholder="不能为空，限制输入6~20"></el-input>
 		</el-form-item>
 		<el-form-item label="真实姓名">
-			<el-input type="text" v-model="form.real.name" class="width-half" placeholder="不能为空，限制输入6~20"></el-input>
+			<el-input type="text" v-model="form.real_name" class="width-half" placeholder="不能为空，限制输入6~20"></el-input>
 		</el-form-item>
 		<el-form-item label="Email">
 			<el-input type="text" v-model="form.email" class="width-half" placeholder="不能为空，限制输入6~20"></el-input>

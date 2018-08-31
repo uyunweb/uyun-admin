@@ -55,9 +55,7 @@ const Auths = {
 	},
 	ajaxGetUserInfoByToken(token, callback) {
 		// 获取用户信息
-		Api.gateway("/apis/getUserInfo", {
-			id: "﻿5b6293346e001018b0409c37".trim()
-		}, (data) => {
+		Api.gateway("/apis/getMyInfo", (data) => {
 			if(data.code===200){
 				data = data.data;
 				callback(null, data);

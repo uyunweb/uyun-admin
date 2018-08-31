@@ -23,6 +23,7 @@
 			<div class="report-list">
 				<el-table class="topic-table" :data="tableData" border v-loading="loading" style="min-height: 400px;">
 					<el-table-column type="index" width="50"></el-table-column>
+					<el-table-column prop="id" label="ID"></el-table-column>
 					<el-table-column prop="login_name" label="登录名"></el-table-column>
 					<el-table-column prop="type" label="账号类型"></el-table-column>
 					<el-table-column prop="admin_level" label="账号权限"></el-table-column>
@@ -35,7 +36,7 @@
 					<el-table-column label="状态">正常</el-table-column>
 					<el-table-column label="操作" min-width="300px">
 						<template slot-scope="scope">
-							<el-button @click="onClickEditAdminAccount(scope.row._id)" type="success" icon="el-icon-edit" size="mini" plain>修改密码</el-button>
+							<el-button @click="onClickEditAdminAccount(scope.row.id)" type="success" icon="el-icon-edit" size="mini" plain>修改密码</el-button>
 							<el-button @click="onClickDeleteAdminAccount(scope)" type="warning" icon="el-icon-delete" size="mini" plain>删除</el-button>
 						</template>
 					</el-table-column>
@@ -83,7 +84,7 @@
 				this.$router.push({path: "/system/admin/update", query:{id}});
 			},
 			onClickDeleteAdminAccount(scope) {
-				let id = scope.row._id;
+				let id = scope.row.id;
 				let index = scope.$index;
 				this.$confirm('此操作将删除该用户, 是否继续?', '提示', {
 					confirmButtonText: '确定',
@@ -107,7 +108,7 @@
 
 					// // 删除某个任务
 					// this.$ajax.gateway("/apis/deleteTask", {
-					// 	id: scope.row._id
+					// 	id: scope.row.id
 					// }, (data) => {
 					// 	if(data.code===200){
 					// 		data = data.data;

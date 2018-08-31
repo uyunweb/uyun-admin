@@ -6,9 +6,21 @@
 					v-model="selected.type"
 					size="small"
 					placeholder="---请选择订单状态---"
-					@change="">
+					@change="ajaxGetOrderList">
 					<el-option
 						v-for="item in enums.orderTypeFull"
+						:key="item.value"
+						:label="item.label"
+						:value="item.value">
+					</el-option>
+				</el-select>
+				<el-select
+					v-model="selected.deleted"
+					size="small"
+					placeholder="---请选择---"
+					@change="ajaxGetOrderList">
+					<el-option
+						v-for="item in enums.deletedType"
 						:key="item.value"
 						:label="item.label"
 						:value="item.value">
@@ -92,18 +104,21 @@
 							<template v-if="scope.row.type===2">
 								<el-button @click="onClickInspectOrder(scope)" type="primary" icon="el-icon-bell" size="mini" plain>审核</el-button>
 							</template>
-							<el-button @click="onClickDeleteOrder(scope)" type="warning" icon="el-icon-delete" size="mini" plain>删除</el-button>
+							<template v-if="!scope.row.deleted">
+								<el-button @click="onClickDeleteOrder(scope)" type="warning" icon="el-icon-delete" size="mini" plain>删除</el-button>
+							</template>
 						</template>
 					</el-table-column>
 				</el-table>
 			</div>
 			<div class="report-footer">
 				<el-pagination
+					v-show="page.total"
 					@size-change="handleSizeChange"
 					@current-change="handleCurrentChange"
 					:current-page="page.page"
-					:page-sizes="[10, 20, 30, 50]"
-					:page-size="page.size"
+					:page-sizes="page.sizes"
+					:page-size.sync="page.size"
 					layout="total, sizes, prev, pager, next, jumper"
 					:total="page.total">
 				</el-pagination>
@@ -161,15 +176,17 @@
 				enums: enums,
 				selected: {
 					type: -1 ,
+					deleted: -1,
 					key_word: ""
 				},
 				inspectDialogVisible: false,
 				inspect_form: {},
 				inspect_oss: null,
 				page: {
-					page:1,
-					size:10,
-					total:100
+					page: 1,
+					size: 10,
+					sizes: [10, 3, 20, 30, 50, 100],
+					total: 0
 				},
 				loading:false,
 				tableData:[]
@@ -180,29 +197,42 @@
 		},
 		methods: {
 			ajaxGetOrderList() {
-				// 获取订单列表，默认返回10条
-				this.$ajax.gateway("/apis/getOrderList", (data) => {
+				this.loading = true;
+				// 根据条件查询订单列表 Admin
+				this.$ajax.gateway("/apis/getOrderList", {
+					type: this.selected.type,
+					deleted: this.selected.deleted,
+					page: this.page.page,
+					size: this.page.size
+				}, (data) => {
+					this.loading = false;
 					if(data.code===200){
-						data = data.data;
-						// do something
 						console.info(data);
-						this.tableData = data;
+						this.page.total = data.dataCount;
+						this.tableData = data.data;
 					} else {
 						console.warn(data);
 					}
 				});
 			},
-			handleSizeChange() {
-
+			handleSizeChange(val) {
+				console.log("-> pageSize 改变时会触发");
+				console.log(`每页 ${val} 条`);
+				this.page.page=1;
+				this.page.size=val;
+				this.ajaxGetOrderList();
 			},
-			handleCurrentChange(){
-
+			handleCurrentChange(val){
+				console.log("-> currentPage 改变时会触发");
+				console.log(`当前页: ${val}`);
+				this.page.page=val;
+				this.ajaxGetOrderList();
 			},
 			onClickInspectOrder(score) {
 				let item = score.row;
 				this.inspect_form = {
 					index: score.$index,
-					id: item._id,
+					id: item.id,
 					type: item.type,
 					desc: null
 				};
@@ -242,7 +272,7 @@
 				}).then(() => {
 					// 删除订单 Admin & User
 					this.$ajax.gateway("/apis/deleteOrder", {
-						id: scope.row._id
+						id: scope.row.id
 					}, (data) => {
 						if(data.code===200){
 							data = data.data;

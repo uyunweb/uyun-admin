@@ -9,7 +9,7 @@
 				<!--submit-->
 				<el-form-item>
 					<el-button type="primary" @click="onSubmit">立即保存</el-button>
-					<el-button>取消</el-button>
+					<el-button @click="goBack">取消</el-button>
 				</el-form-item>
 			</el-form>
 		</div>
@@ -39,6 +39,9 @@
 		},
 
 		methods: {
+			goBack() {
+				this.$router.go(-1);
+			},
 			onSubmit() {
 				console.log('submit!');
 				console.log(this.form);

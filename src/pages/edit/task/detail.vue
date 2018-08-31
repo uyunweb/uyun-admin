@@ -47,7 +47,7 @@
 					if(data.code===200){
 						data = data.data;
 						// 默认添加一个步骤
-						if(data.step_list.length===0){
+						if(data.step_list && data.step_list.length===0){
 							data.step_list.push(this.defaultStepObject);
 						}
 						this.form = data;
@@ -70,7 +70,7 @@
 				// 修改（更新）一个任务
 				this.$ajax.gateway("/apis/updateTaskEdit", {
 					body: {
-						id: this.form._id,
+						id: this.form.id,
 						task: this.form
 					}
 				}, (data) => {

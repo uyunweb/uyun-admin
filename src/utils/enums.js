@@ -18,6 +18,9 @@ const enums = {
 		label: "已下架"
 	}, {
 		value: 4,
+		label: "已完成"
+	}, {
+		value: 5,
 		label: "已结束"
 	}],
 	taskStatusFull: [{
@@ -27,13 +30,13 @@ const enums = {
 
 	// 任务分类
 	taskType: [{
-		value: 1,
+		value: 0,
 		label: "普通任务"
 	}, {
-		value: 2,
+		value: 1,
 		label: "微信任务"
 	}, {
-		value: 3,
+		value: 2,
 		label: "下载任务"
 	}],
 	taskTypeFull: [{
@@ -162,6 +165,15 @@ const enums = {
 		value: -1,
 		label: "-全部订单-"
 	}],
+
+	// 是否删除
+	deletedType:[{
+		value: -1,
+		label: '-正常状态-'
+	}, {
+		value: 1,
+		label: '已删除'
+	}]
 };
 
 for(let key in enums){

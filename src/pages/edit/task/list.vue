@@ -6,7 +6,7 @@
 					v-model="selected.status"
 					size="small"
 					placeholder="---请选择任务状态---"
-					@change="">
+					@change="ajaxGetTaskList">
 					<el-option
 						v-for="item in enums.taskStatusFull"
 						:key="item.value"
@@ -18,7 +18,7 @@
 					v-model="selected.type"
 					size="small"
 					placeholder="---请选择任务分类---"
-					@change="">
+					@change="ajaxGetTaskList">
 					<el-option
 						v-for="item in enums.taskTypeFull"
 						:key="item.value"
@@ -26,18 +26,18 @@
 						:value="item.value">
 					</el-option>
 				</el-select>
-				<el-select
-					v-model="selected.submit_type"
-					size="small"
-					placeholder="---请选择审核方式--"
-					@change="">
-					<el-option
-						v-for="item in enums.taskSubmitTypeFull"
-						:key="item.value"
-						:label="item.label"
-						:value="item.value">
-					</el-option>
-				</el-select>
+				<!--<el-select-->
+					<!--v-model="selected.submit_type"-->
+					<!--size="small"-->
+					<!--placeholder="-&#45;&#45;请选择审核方式&#45;&#45;"-->
+					<!--@change="">-->
+					<!--<el-option-->
+						<!--v-for="item in enums.taskSubmitTypeFull"-->
+						<!--:key="item.value"-->
+						<!--:label="item.label"-->
+						<!--:value="item.value">-->
+					<!--</el-option>-->
+				<!--</el-select>-->
 				<el-input
 					v-model="selected.key_word"
 					size="small"
@@ -54,14 +54,23 @@
 			<div class="report-list">
 				<el-table class="topic-table" :data="tableData" border v-loading="loading" style="min-height: 400px;">
 					<el-table-column type="index" width="50"></el-table-column>
-					<el-table-column label="任务名称" min-width="240">
+					<el-table-column label="任务名称" min-width="200">
 						<template slot-scope="scope">
-							<a :href="'#/?id='+scope.row._id">{{scope.row.title}}</a>
+							<a :href="'#/?id='+scope.row.id">{{scope.row.title}}</a>
+						</template>
+					</el-table-column>
+					<el-table-column label="分类">
+						<template slot-scope="scope">
+							{{scope.row.type | matchingValue(enums.taskType)}}
 						</template>
 					</el-table-column>
 					<el-table-column prop="price" label="任务奖励"></el-table-column>
-					<el-table-column prop="task_num" label="任务次数"></el-table-column>
-					<el-table-column label="创建者" min-width="100">
+					<el-table-column label="任务次数">
+						<template slot-scope="scope">
+							{{scope.row.task_complete_num}}/{{scope.row.task_receive_num}}/{{scope.row.task_num}}
+						</template>
+					</el-table-column>
+					<el-table-column label="创建者" min-width="80">
 						<template slot-scope="scope">
 							<template v-if="scope.row.user_login_name">{{scope.row.user_login_name}}</template>
 							<template v-else>
@@ -72,7 +81,7 @@
 							</template>
 						</template>
 					</el-table-column>
-					<el-table-column label="创建时间" min-width="160">
+					<el-table-column label="创建时间" min-width="140">
 						<template slot-scope="scope">
 							{{scope.row.create_at | date}}
 						</template>
@@ -104,11 +113,12 @@
 			</div>
 			<div class="report-footer">
 				<el-pagination
+					v-show="page.total"
 					@size-change="handleSizeChange"
 					@current-change="handleCurrentChange"
 					:current-page="page.page"
-					:page-sizes="[10, 20, 30, 50]"
-					:page-size="page.size"
+					:page-sizes="page.sizes"
+					:page-size.sync="page.size"
 					layout="total, sizes, prev, pager, next, jumper"
 					:total="page.total">
 				</el-pagination>
@@ -155,10 +165,11 @@
 				},
 				inspectDialogVisible: false,
 				inspect_form: {},
-				page: {
-					page:1,
-					size:10,
-					total:100
+				page:  {
+					page: 1,
+					size: 10,
+					sizes: [10, 3, 20, 30, 50, 100],
+					total: 0
 				},
 				loading:false,
 				tableData:[]
@@ -170,51 +181,62 @@
 		methods: {
 			ajaxGetTaskList() {
 				this.loading = true;
-				// 获取任务列表，默认返回10条
-				this.$ajax.gateway("/apis/getTaskList", (data) => {
+				// 获取任务列表，默认返回10条 Admin && User
+				this.$ajax.gateway("/apis/getTaskList", {
+					status: this.selected.status,
+					type: this.selected.type,
+					page: this.page.page,
+					size: this.page.size
+				}, (data) => {
 					this.loading = false;
 					if(data.code===200){
-						data = data.data;
-						// do something
 						console.info(data);
-						this.tableData = data;
+						this.page.total = data.dataCount;
+						this.tableData = data.data;
 					} else {
 						console.warn(data);
 					}
 				});
 			},
-			handleSizeChange() {
-
+			handleSizeChange(val) {
+				console.log("-> pageSize 改变时会触发");
+				console.log(`每页 ${val} 条`);
+				this.page.page=1;
+				this.page.size=val;
+				this.ajaxGetTaskList();
 			},
-			handleCurrentChange(){
-
+			handleCurrentChange(val){
+				console.log("-> currentPage 改变时会触发");
+				console.log(`当前页: ${val}`);
+				this.page.page=val;
+				this.ajaxGetTaskList();
 			},
 			print(){
 
 			},
 			onClickEditTask(item) {
-				this.$router.push({path: "/edit/task/detail", query:{id: item._id}});
+				this.$router.push({path: "/edit/task/detail", query:{id: item.id}});
 			},
 			onClickInspectTask(score) {
 				let item = score.row;
 				if(item.status === 0){
 					this.inspect_form = {
 						index: score.$index,
-						id: item._id,
+						id: item.id,
 						status: 1,
 						desc: undefined
 					};
 				} else if(item.status === 1) {
 					this.inspect_form = {
 						index: score.$index,
-						id: item._id,
+						id: item.id,
 						status: 3,
 						desc: undefined
 					};
 				} else {
 					this.inspect_form = {
 						index: score.$index,
-						id: item._id,
+						id: item.id,
 						status: 0,
 						desc: undefined
 					};
@@ -261,7 +283,7 @@
 				}).then(() => {
 					// 删除某个任务
 					this.$ajax.gateway("/apis/deleteTask", {
-						id: scope.row._id
+						id: scope.row.id
 					}, (data) => {
 						if(data.code===200){
 							data = data.data;
