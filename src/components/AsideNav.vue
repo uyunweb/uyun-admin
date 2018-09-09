@@ -74,7 +74,7 @@
 							</a>
 						</template>
 						<el-menu-item index="/action/order" class="sub-menu-item">报名管理</el-menu-item>
-						<el-menu-item index="/action/cash" class="sub-menu-item">提现管理</el-menu-item>
+						<el-menu-item index="/action/water" class="sub-menu-item">提现管理</el-menu-item>
 					</el-submenu>
 					<el-submenu
 						index="propertys"

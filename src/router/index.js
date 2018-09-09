@@ -21,6 +21,11 @@ import create_task from '../pages/edit/task/create';
 import order_list from '../pages/action/order/list';
 import order_detail from '../pages/action/order/detail';
 
+// 查看流水
+import water_list from '../pages/action/water/list';
+
+
+
 //用户管理
 import admin_list from '../pages/system/admin/list';
 import create_admin from '../pages/system/admin/create';
@@ -122,6 +127,22 @@ let router = new Router({
 					component: order_detail,
 					meta: {
 						name: '订单详情',
+						breadNumber: 1,
+					}
+				}]
+			}, {
+				path: 'water',
+				component: EmptyRouter,
+				meta: {
+					name: '提现列表',
+					breadNumber: 1,
+				},
+				children: [{
+					path: 'list',
+					alias: '/',
+					component: water_list,
+					meta: {
+						name: '流水列表',
 						breadNumber: 1,
 					}
 				}]

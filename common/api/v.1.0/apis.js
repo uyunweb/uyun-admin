@@ -1,9 +1,9 @@
 /**!
  * 优云任务 1.0 v1.0
- * 接口数量 45
+ * 接口数量 46
  * http://uyun.net:3220/api/list?p_id=BJlrJJ@dSQ&v_id=ry@r1yZdSm&g_id=HkecbyW_S7
  *
- * 2018-08-30 18:39:09 (c) sxApi Foundation, Inc.
+ * 2018-09-04 01:40:30 (c) sxApi Foundation, Inc.
  *
  **/ 
 var servers = require('../../servers');
@@ -11,46 +11,200 @@ var servers = require('../../servers');
 
 
 /** 
- * Created by getTasksByUser
+ * Created by getOrderDetail
  *
- * 根据用户Id查询该用户创建的所有任务 Admin
+ * 根据id查询一个订单的详情 Admin & User
  *
  * @id 	undefined-
+ * @full 	不传时返回基础数据 =1时返回所有关联数据-
  */
-exports.getTasksByUser = function (data, callback) {
+exports.getOrderDetail = function (data, callback) {
 	servers.GET({
-		url: "/api/task/get/by_user",
+		url: "/api/order/get/detail",
 		token: !data.TOKEN?"":data.TOKEN,
 		mock: !data.mock?false:data.mock,
-		swaggerId: "getTasksByUser",
+		swaggerId: "getOrderDetail",
 		query: {
-			id: data.id
+			id: data.id,
+			full: data.full
 		}
 	}, callback);
 };
-/** End getTasksByUser */
+/** End getOrderDetail */
 
 
 
 /** 
- * Created by wechatPushMessage
+ * Created by submitOrder
  *
- * 推送模板消息 (Todo) Admin内部
+ * 提交订单（完成任务） User
  *
- * @wechatPushMessage 	undefined-Body
+ * @submitOrder 	undefined-Body
  */
-exports.wechatPushMessage = function (data, callback) {
+exports.submitOrder = function (data, callback) {
 	servers.POST({
-		url: "/api/wechat/push_message",
+		url: "/api/order/submit",
 		token: !data.TOKEN?"":data.TOKEN,
 		mock: !data.mock?false:data.mock,
-		swaggerId: "wechatPushMessage",
+		swaggerId: "submitOrder",
 		body: data.body,
 		query: {
 		}
 	}, callback);
 };
-/** End wechatPushMessage */
+/** End submitOrder */
+
+
+
+/** 
+ * Created by helloWorld
+ *
+ * 忘记密码时更新密码（非必要） (Todo) User
+ *
+ * @forgetPassword 	undefined-Body
+ */
+exports.helloWorld = function (data, callback) {
+	servers.POST({
+		url: "/api/auth/forget_password",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "helloWorld",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End helloWorld */
+
+
+
+/** 
+ * Created by updateTaskEdit
+ *
+ * 修改任务（管理员） Admin
+ *
+ * @updateTaskEdit 	undefined-Body
+ */
+exports.updateTaskEdit = function (data, callback) {
+	servers.POST({
+		url: "/api/task/update/edit",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "updateTaskEdit",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End updateTaskEdit */
+
+
+
+/** 
+ * Created by authLogin
+ *
+ * 通用登录 Admin
+ *
+ * @Login 	undefined-Body
+ */
+exports.authLogin = function (data, callback) {
+	servers.POST({
+		url: "/api/auth/login",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "authLogin",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End authLogin */
+
+
+
+/** 
+ * Created by getTaskReceiveUser
+ *
+ * 查询某个任务的报名订单详情 Admin & User TODO
+ *
+ * @id 	undefined-
+ * @type 	undefined-
+ */
+exports.getTaskReceiveUser = function (data, callback) {
+	servers.GET({
+		url: "/api/task/get/receive_user",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "getTaskReceiveUser",
+		query: {
+			id: data.id,
+			type: data.type
+		}
+	}, callback);
+};
+/** End getTaskReceiveUser */
+
+
+
+/** 
+ * Created by createOrder
+ *
+ * 创建订单（领取任务） User
+ *
+ * @createOrder 	undefined-Body
+ */
+exports.createOrder = function (data, callback) {
+	servers.POST({
+		url: "/api/order/create",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "createOrder",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End createOrder */
+
+
+
+/** 
+ * Created by authLogout
+ *
+ * 注销用户 Admin & User
+ *
+ */
+exports.authLogout = function (data, callback) {
+	servers.GET({
+		url: "/api/auth/logout",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "authLogout"
+	}, callback);
+};
+/** End authLogout */
+
+
+
+/** 
+ * Created by signUpMobile
+ *
+ * 手机号码注册账号（非必要）User
+ *
+ * @signUpMobile 	undefined-Body
+ */
+exports.signUpMobile = function (data, callback) {
+	servers.POST({
+		url: "/api/auth/sign_up_mobile",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "signUpMobile",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End signUpMobile */
 
 
 
@@ -73,24 +227,24 @@ exports.getMyInfo = function (data, callback) {
 
 
 /** 
- * Created by signUpSystemUser
+ * Created by getOssDetail
  *
- * 创建系统用户 Admin
+ * 查找某个订单任务的附件 Admin & User
  *
- * @signUpSystem 	undefined-Body
+ * @id 	oss_id-
  */
-exports.signUpSystemUser = function (data, callback) {
-	servers.POST({
-		url: "/api/auth/sign_up_system",
+exports.getOssDetail = function (data, callback) {
+	servers.GET({
+		url: "/api/order/get/oss",
 		token: !data.TOKEN?"":data.TOKEN,
 		mock: !data.mock?false:data.mock,
-		swaggerId: "signUpSystemUser",
-		body: data.body,
+		swaggerId: "getOssDetail",
 		query: {
+			id: data.id
 		}
 	}, callback);
 };
-/** End signUpSystemUser */
+/** End getOssDetail */
 
 
 
@@ -145,625 +299,6 @@ exports.getOrderList = function (data, callback) {
 
 
 /** 
- * Created by getTaskReceiveUser
- *
- * 查询某个任务的报名订单详情 Admin & User
- *
- * @id 	undefined-
- * @type 	undefined-
- */
-exports.getTaskReceiveUser = function (data, callback) {
-	servers.GET({
-		url: "/api/task/get/receive_user",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "getTaskReceiveUser",
-		query: {
-			id: data.id,
-			type: data.type
-		}
-	}, callback);
-};
-/** End getTaskReceiveUser */
-
-
-
-/** 
- * Created by wechatPushMessage2
- *
- * 生成一个微信支付订单 (暂不开发) Admin内部
- *
- */
-exports.wechatPushMessage2 = function (data, callback) {
-	servers.POST({
-		url: "/api/wechat/create_wx_order",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "wechatPushMessage2"
-	}, callback);
-};
-/** End wechatPushMessage2 */
-
-
-
-/** 
- * Created by getMyReleaseTask
- *
- * 获取我发布的所有任务 (Todo)
- *
- */
-exports.getMyReleaseTask = function (data, callback) {
-	servers.GET({
-		url: "/api/user/my/release_task",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "getMyReleaseTask"
-	}, callback);
-};
-/** End getMyReleaseTask */
-
-
-
-/** 
- * Created by getTaskReceiveDetail
- *
- * 查询某个任务的报名情况 User
- *
- * @id 	undefined-
- */
-exports.getTaskReceiveDetail = function (data, callback) {
-	servers.GET({
-		url: "/api/task/get/receive_detail",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "getTaskReceiveDetail",
-		query: {
-			id: data.id
-		}
-	}, callback);
-};
-/** End getTaskReceiveDetail */
-
-
-
-/** 
- * Created by authLogin
- *
- * 通用登录 Admin
- *
- * @Login 	undefined-Body
- */
-exports.authLogin = function (data, callback) {
-	servers.POST({
-		url: "/api/auth/login",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "authLogin",
-		body: data.body,
-		query: {
-		}
-	}, callback);
-};
-/** End authLogin */
-
-
-
-/** 
- * Created by wechatPaymentToUser
- *
- * 向某个微信用户发红包 (Todo) Admin内部
- *
- * @wechatPaymentToUser 	undefined-Body
- */
-exports.wechatPaymentToUser = function (data, callback) {
-	servers.POST({
-		url: "/api/wechat/payment_to_user",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "wechatPaymentToUser",
-		body: data.body,
-		query: {
-		}
-	}, callback);
-};
-/** End wechatPaymentToUser */
-
-
-
-/** 
- * Created by wechatPaymentToUser2
- *
- * 客服自动回复 (待确定方案) Admin内部
- *
- */
-exports.wechatPaymentToUser2 = function (data, callback) {
-	servers.POST({
-		url: "/api/wechat/reply_message",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "wechatPaymentToUser2"
-	}, callback);
-};
-/** End wechatPaymentToUser2 */
-
-
-
-/** 
- * Created by getOssDetail
- *
- * 查找某个订单任务的附件 Admin & User
- *
- * @id 	oss_id-
- */
-exports.getOssDetail = function (data, callback) {
-	servers.GET({
-		url: "/api/order/get/oss",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "getOssDetail",
-		query: {
-			id: data.id
-		}
-	}, callback);
-};
-/** End getOssDetail */
-
-
-
-/** 
- * Created by cancelOrder
- *
- * 取消某个订单 User
- *
- * @cancelOrder 	undefined-Body
- */
-exports.cancelOrder = function (data, callback) {
-	servers.POST({
-		url: "/api/order/cancel",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "cancelOrder",
-		body: data.body,
-		query: {
-		}
-	}, callback);
-};
-/** End cancelOrder */
-
-
-
-/** 
- * Created by createOrder
- *
- * 创建订单（领取任务） User
- *
- * @createOrder 	undefined-Body
- */
-exports.createOrder = function (data, callback) {
-	servers.POST({
-		url: "/api/order/create",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "createOrder",
-		body: data.body,
-		query: {
-		}
-	}, callback);
-};
-/** End createOrder */
-
-
-
-/** 
- * Created by deleteOrder
- *
- * 删除订单 Admin & User
- *
- * @id 	订单id-
- */
-exports.deleteOrder = function (data, callback) {
-	servers.DELETE({
-		url: "/api/order/delete",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "deleteOrder",
-		query: {
-			id: data.id
-		}
-	}, callback);
-};
-/** End deleteOrder */
-
-
-
-/** 
- * Created by helloWorld
- *
- * 忘记密码时更新密码（非必要） (Todo) User
- *
- * @forgetPassword 	undefined-Body
- */
-exports.helloWorld = function (data, callback) {
-	servers.POST({
-		url: "/api/auth/forget_password",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "helloWorld",
-		body: data.body,
-		query: {
-		}
-	}, callback);
-};
-/** End helloWorld */
-
-
-
-/** 
- * Created by signUpMobile
- *
- * 手机号码注册账号（非必要）User
- *
- * @signUpMobile 	undefined-Body
- */
-exports.signUpMobile = function (data, callback) {
-	servers.POST({
-		url: "/api/auth/sign_up_mobile",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "signUpMobile",
-		body: data.body,
-		query: {
-		}
-	}, callback);
-};
-/** End signUpMobile */
-
-
-
-/** 
- * Created by updateUserInfo
- *
- * 更新用户信息 (Todo)
- *
- * @openid 	undefined-
- */
-exports.updateUserInfo = function (data, callback) {
-	servers.POST({
-		url: "/api/user/update",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "updateUserInfo",
-		query: {
-		}
-	}, callback);
-};
-/** End updateUserInfo */
-
-
-
-/** 
- * Created by getMyOrder
- *
- * 查找我的所有订单 User
- *
- */
-exports.getMyOrder = function (data, callback) {
-	servers.GET({
-		url: "/api/user/get/my/order",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "getMyOrder"
-	}, callback);
-};
-/** End getMyOrder */
-
-
-
-/** 
- * Created by getMyWater
- *
- * 获取我的财务流水信息
- *
- */
-exports.getMyWater = function (data, callback) {
-	servers.GET({
-		url: "/api/user/get/my/water",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "getMyWater"
-	}, callback);
-};
-/** End getMyWater */
-
-
-
-/** 
- * Created by getQiniuToken
- *
- * 获取七牛云上传文件的Token User
- *
- */
-exports.getQiniuToken = function (data, callback) {
-	servers.GET({
-		url: "/api/upload/qn/get_token",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "getQiniuToken"
-	}, callback);
-};
-/** End getQiniuToken */
-
-
-
-/** 
- * Created by bindMobile
- *
- * 绑定手机号码 (Todo) User
- *
- * @bindMobile 	undefined-Body
- */
-exports.bindMobile = function (data, callback) {
-	servers.POST({
-		url: "/api/auth/bind_mobile",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "bindMobile",
-		body: data.body,
-		query: {
-		}
-	}, callback);
-};
-/** End bindMobile */
-
-
-
-/** 
- * Created by getTaskList
- *
- * 获取任务列表，默认返回10条 Admin && User
- *
- * @status 	-1=全部; 0=已发布; 1=已审核(默认); 2=审核失败；3=已下架; 4=已完成(默认); 5=已结束(默认)-
- * @type 	-1=全部(默认); 0=普通任务;1=微信任务;2=下载任务-
- * @is_hot 	0 or 1-
- * @tag 	undefined-
- * @user_type 	0=普通用户 1=实名认证用户 2=企业商家 4=系统管理员(默认)-
- * @user_id 	undefined-
- * @page 	当前页数-
- * @size 	每页条数-
- * @sort 	-1=sort字段（大->小）(默认)； 1=发布时间（新->旧）; 2=奖励（大->小）; 3=点击数（大->小）; 4=收藏数（大->小）;-
- */
-exports.getTaskList = function (data, callback) {
-	servers.GET({
-		url: "/api/task/list",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "getTaskList",
-		query: {
-			status: data.status,
-			type: data.type,
-			is_hot: data.is_hot,
-			tag: data.tag,
-			user_type: data.user_type,
-			user_id: data.user_id,
-			page: data.page,
-			size: data.size,
-			sort: data.sort
-		}
-	}, callback);
-};
-/** End getTaskList */
-
-
-
-/** 
- * Created by createTask
- *
- * 创建一个任务 Admin
- *
- * @createTask 	undefined-Body
- */
-exports.createTask = function (data, callback) {
-	servers.POST({
-		url: "/api/task/created",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "createTask",
-		body: data.body,
-		query: {
-		}
-	}, callback);
-};
-/** End createTask */
-
-
-
-/** 
- * Created by updateTaskEdit
- *
- * 修改任务（管理员） Admin
- *
- * @updateTaskEdit 	undefined-Body
- */
-exports.updateTaskEdit = function (data, callback) {
-	servers.POST({
-		url: "/api/task/update/edit",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "updateTaskEdit",
-		body: data.body,
-		query: {
-		}
-	}, callback);
-};
-/** End updateTaskEdit */
-
-
-
-/** 
- * Created by createdHomepageBanner
- *
- * 添加小程序首页Banner (Todo)
- *
- */
-exports.createdHomepageBanner = function (data, callback) {
-	servers.POST({
-		url: "/api/web/homepage/created_banner",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "createdHomepageBanner"
-	}, callback);
-};
-/** End createdHomepageBanner */
-
-
-
-/** 
- * Created by wechatGetSessionKey
- *
- * 根据授权获取到的code，换取小程序的session key和openid（以及有条件下的unionid） User
- *
- * @code 	undefined-
- */
-exports.wechatGetSessionKey = function (data, callback) {
-	servers.POST({
-		url: "/api/wechat/get_session_key",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "wechatGetSessionKey",
-		query: {
-			code: data.code
-		}
-	}, callback);
-};
-/** End wechatGetSessionKey */
-
-
-
-/** 
- * Created by getMyCollects
- *
- * 获取我收藏的任务 (Todo)
- *
- */
-exports.getMyCollects = function (data, callback) {
-	servers.GET({
-		url: "/api/user/get_my_collects",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "getMyCollects"
-	}, callback);
-};
-/** End getMyCollects */
-
-
-
-/** 
- * Created by getUserInfo
- *
- * 获取用户详情信息 Admin
- *
- * @id 	undefined-
- * @weixin_openid 	undefined-
- */
-exports.getUserInfo = function (data, callback) {
-	servers.GET({
-		url: "/api/user/detail",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "getUserInfo",
-		query: {
-			id: data.id,
-			weixin_openid: data.weixin_openid
-		}
-	}, callback);
-};
-/** End getUserInfo */
-
-
-
-/** 
- * Created by getHomepageBanner
- *
- * 获取小程序首页banner (Todo)
- *
- */
-exports.getHomepageBanner = function (data, callback) {
-	servers.GET({
-		url: "/api/web/homepage/get_banner",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "getHomepageBanner"
-	}, callback);
-};
-/** End getHomepageBanner */
-
-
-
-/** 
- * Created by getOrderDetail
- *
- * 根据id查询一个订单的详情 Admin & User
- *
- * @id 	undefined-
- * @full 	不传时返回基础数据 =1时返回所有关联数据-
- */
-exports.getOrderDetail = function (data, callback) {
-	servers.GET({
-		url: "/api/order/get/detail",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "getOrderDetail",
-		query: {
-			id: data.id,
-			full: data.full
-		}
-	}, callback);
-};
-/** End getOrderDetail */
-
-
-
-/** 
- * Created by checkOrder
- *
- * 审核一个任务订单 Admin
- *
- * @checkOrder 	undefined-Body
- */
-exports.checkOrder = function (data, callback) {
-	servers.POST({
-		url: "/api/order/check_order",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "checkOrder",
-		body: data.body,
-		query: {
-		}
-	}, callback);
-};
-/** End checkOrder */
-
-
-
-/** 
- * Created by authLogout
- *
- * 注销用户 Admin & User
- *
- */
-exports.authLogout = function (data, callback) {
-	servers.GET({
-		url: "/api/auth/logout",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "authLogout"
-	}, callback);
-};
-/** End authLogout */
-
-
-
-/** 
  * Created by removeAccount
  *
  * 删除某个账号 Admin
@@ -808,90 +343,38 @@ exports.sendAuthCode = function (data, callback) {
 
 
 /** 
- * Created by bindWeixinMobile
+ * Created by getMyOrder
  *
- * 使用小程序授权绑定手机号码 User
+ * 查找我的所有订单 User
  *
- * @bindWeixinMobile 	undefined-Body
  */
-exports.bindWeixinMobile = function (data, callback) {
-	servers.POST({
-		url: "/api/auth/wechat/bind_mobile",
+exports.getMyOrder = function (data, callback) {
+	servers.GET({
+		url: "/api/user/get/my/order",
 		token: !data.TOKEN?"":data.TOKEN,
 		mock: !data.mock?false:data.mock,
-		swaggerId: "bindWeixinMobile",
-		body: data.body,
-		query: {
-		}
+		swaggerId: "getMyOrder"
 	}, callback);
 };
-/** End bindWeixinMobile */
+/** End getMyOrder */
 
 
 
 /** 
- * Created by updateTaskInspect
+ * Created by getMyReleaseTask
  *
- * 审核任务（管理员） Admin
+ * 获取我发布的所有任务 (Todo)
  *
- * @updateTaskInspect 	undefined-Body
  */
-exports.updateTaskInspect = function (data, callback) {
-	servers.POST({
-		url: "/api/task/update/inspect",
+exports.getMyReleaseTask = function (data, callback) {
+	servers.GET({
+		url: "/api/user/my/release_task",
 		token: !data.TOKEN?"":data.TOKEN,
 		mock: !data.mock?false:data.mock,
-		swaggerId: "updateTaskInspect",
-		body: data.body,
-		query: {
-		}
+		swaggerId: "getMyReleaseTask"
 	}, callback);
 };
-/** End updateTaskInspect */
-
-
-
-/** 
- * Created by loginByWeiXin
- *
- * 微信用户登录 User
- *
- * @Login 	undefined-Body
- */
-exports.loginByWeiXin = function (data, callback) {
-	servers.POST({
-		url: "/api/auth/login/by_weixin",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "loginByWeiXin",
-		body: data.body,
-		query: {
-		}
-	}, callback);
-};
-/** End loginByWeiXin */
-
-
-
-/** 
- * Created by updateTaskVip
- *
- * 修改任务（商家/普通用户）  (Todo) Admin
- *
- * @updateTaskVip 	undefined-Body
- */
-exports.updateTaskVip = function (data, callback) {
-	servers.POST({
-		url: "/api/task/update/vip",
-		token: !data.TOKEN?"":data.TOKEN,
-		mock: !data.mock?false:data.mock,
-		swaggerId: "updateTaskVip",
-		body: data.body,
-		query: {
-		}
-	}, callback);
-};
-/** End updateTaskVip */
+/** End getMyReleaseTask */
 
 
 
@@ -918,6 +401,111 @@ exports.deleteTask = function (data, callback) {
 
 
 /** 
+ * Created by getTasksByUser
+ *
+ * 根据用户Id查询该用户创建的所有任务 Admin TODO
+ *
+ * @id 	undefined-
+ */
+exports.getTasksByUser = function (data, callback) {
+	servers.GET({
+		url: "/api/task/get/by_user",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "getTasksByUser",
+		query: {
+			id: data.id
+		}
+	}, callback);
+};
+/** End getTasksByUser */
+
+
+
+/** 
+ * Created by getMyCollects
+ *
+ * 获取我收藏的任务 (Todo)
+ *
+ */
+exports.getMyCollects = function (data, callback) {
+	servers.GET({
+		url: "/api/user/get_my_collects",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "getMyCollects"
+	}, callback);
+};
+/** End getMyCollects */
+
+
+
+/** 
+ * Created by updateTaskVip
+ *
+ * 修改任务（商家/普通用户）  (Todo) Admin
+ *
+ * @updateTaskVip 	undefined-Body
+ */
+exports.updateTaskVip = function (data, callback) {
+	servers.POST({
+		url: "/api/task/update/vip",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "updateTaskVip",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End updateTaskVip */
+
+
+
+/** 
+ * Created by bindWeixinMobile
+ *
+ * 使用小程序授权绑定手机号码 User
+ *
+ * @bindWeixinMobile 	undefined-Body
+ */
+exports.bindWeixinMobile = function (data, callback) {
+	servers.POST({
+		url: "/api/auth/wechat/bind_mobile",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "bindWeixinMobile",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End bindWeixinMobile */
+
+
+
+/** 
+ * Created by updateUserInfo
+ *
+ * 更新用户信息 (Todo)
+ *
+ * @openid 	undefined-
+ */
+exports.updateUserInfo = function (data, callback) {
+	servers.POST({
+		url: "/api/user/update",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "updateUserInfo",
+		query: {
+		}
+	}, callback);
+};
+/** End updateUserInfo */
+
+
+
+/** 
  * Created by getTaskDetail
  *
  * 获取任务详情 Admin & User
@@ -940,6 +528,322 @@ exports.getTaskDetail = function (data, callback) {
 
 
 /** 
+ * Created by getTaskList
+ *
+ * 获取任务列表，默认返回10条 Admin && User
+ *
+ * @status 	-1=全部; 0=已发布; 1=已审核(默认); 2=审核失败；3=已下架; 4=已完成(默认); 5=已结束(默认)-
+ * @type 	-1=全部(默认); 0=普通任务;1=微信任务;2=下载任务-
+ * @is_hot 	0 or 1-
+ * @tag 	undefined-
+ * @user_type 	0=普通用户 1=实名认证用户 2=企业商家 4=系统管理员(默认)-
+ * @user_id 	undefined-
+ * @page 	当前页数-
+ * @size 	每页条数-
+ * @sort 	-1=sort字段（大->小）(默认)； 1=发布时间（新->旧）; 2=奖励（大->小）; 3=点击数（大->小）; 4=收藏数（大->小）;-
+ */
+exports.getTaskList = function (data, callback) {
+	servers.GET({
+		url: "/api/task/list",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "getTaskList",
+		query: {
+			status: data.status,
+			type: data.type,
+			is_hot: data.is_hot,
+			tag: data.tag,
+			user_type: data.user_type,
+			user_id: data.user_id,
+			page: data.page,
+			size: data.size,
+			sort: data.sort
+		}
+	}, callback);
+};
+/** End getTaskList */
+
+
+
+/** 
+ * Created by deleteOrder
+ *
+ * 删除订单 Admin & User
+ *
+ * @id 	订单id-
+ */
+exports.deleteOrder = function (data, callback) {
+	servers.DELETE({
+		url: "/api/order/delete",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "deleteOrder",
+		query: {
+			id: data.id
+		}
+	}, callback);
+};
+/** End deleteOrder */
+
+
+
+/** 
+ * Created by cancelOrder
+ *
+ * 取消某个订单 User
+ *
+ * @cancelOrder 	undefined-Body
+ */
+exports.cancelOrder = function (data, callback) {
+	servers.POST({
+		url: "/api/order/cancel",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "cancelOrder",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End cancelOrder */
+
+
+
+/** 
+ * Created by getHomepageBanner
+ *
+ * 获取小程序首页banner (Todo)
+ *
+ */
+exports.getHomepageBanner = function (data, callback) {
+	servers.GET({
+		url: "/api/web/homepage/get_banner",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "getHomepageBanner"
+	}, callback);
+};
+/** End getHomepageBanner */
+
+
+
+/** 
+ * Created by wechatPushMessage2
+ *
+ * 生成一个微信支付订单 (暂不开发) Admin内部
+ *
+ */
+exports.wechatPushMessage2 = function (data, callback) {
+	servers.POST({
+		url: "/api/wechat/create_wx_order",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "wechatPushMessage2"
+	}, callback);
+};
+/** End wechatPushMessage2 */
+
+
+
+/** 
+ * Created by wechatGetSessionKey
+ *
+ * 根据授权获取到的code，换取小程序的session key和openid（以及有条件下的unionid） User
+ *
+ * @code 	undefined-
+ */
+exports.wechatGetSessionKey = function (data, callback) {
+	servers.POST({
+		url: "/api/wechat/get_session_key",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "wechatGetSessionKey",
+		query: {
+			code: data.code
+		}
+	}, callback);
+};
+/** End wechatGetSessionKey */
+
+
+
+/** 
+ * Created by createdHomepageBanner
+ *
+ * 添加小程序首页Banner (Todo)
+ *
+ */
+exports.createdHomepageBanner = function (data, callback) {
+	servers.POST({
+		url: "/api/web/homepage/created_banner",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "createdHomepageBanner"
+	}, callback);
+};
+/** End createdHomepageBanner */
+
+
+
+/** 
+ * Created by getWaterList
+ *
+ * 获取用户所有订单流水信息
+ *
+ * @type 	Type 0=未知(未成功)  1=收入  2=支出-
+ * @count_type 	流水分类 0=未知 （11=任务奖励 12=系统充值 13=签到奖励 14=活动中奖）收入 （21=用户提现 22=系统扣除 23=兑换消费）支出-
+ * @deleted 	是否删除 0 or 1-
+ * @user_id 	用户Id-
+ * @page 	当前页数-
+ * @size 	每页条数-
+ */
+exports.getWaterList = function (data, callback) {
+	servers.GET({
+		url: "/api/user/get/water",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "getWaterList",
+		query: {
+			type: data.type,
+			count_type: data.count_type,
+			deleted: data.deleted,
+			user_id: data.user_id,
+			page: data.page,
+			size: data.size
+		}
+	}, callback);
+};
+/** End getWaterList */
+
+
+
+/** 
+ * Created by checkOrder
+ *
+ * 审核一个任务订单 Admin
+ *
+ * @checkOrder 	undefined-Body
+ */
+exports.checkOrder = function (data, callback) {
+	servers.POST({
+		url: "/api/order/check_order",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "checkOrder",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End checkOrder */
+
+
+
+/** 
+ * Created by wechatPushMessage
+ *
+ * 推送模板消息 (Todo) Admin内部
+ *
+ * @wechatPushMessage 	undefined-Body
+ */
+exports.wechatPushMessage = function (data, callback) {
+	servers.POST({
+		url: "/api/wechat/push_message",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "wechatPushMessage",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End wechatPushMessage */
+
+
+
+/** 
+ * Created by bindMobile
+ *
+ * 绑定手机号码 (Todo) User
+ *
+ * @bindMobile 	undefined-Body
+ */
+exports.bindMobile = function (data, callback) {
+	servers.POST({
+		url: "/api/auth/bind_mobile",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "bindMobile",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End bindMobile */
+
+
+
+/** 
+ * Created by getMyWater
+ *
+ * 获取我的财务流水信息
+ *
+ */
+exports.getMyWater = function (data, callback) {
+	servers.GET({
+		url: "/api/user/get/my/water",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "getMyWater"
+	}, callback);
+};
+/** End getMyWater */
+
+
+
+/** 
+ * Created by wechatPaymentToUser2
+ *
+ * 客服自动回复 (待确定方案) Admin内部
+ *
+ */
+exports.wechatPaymentToUser2 = function (data, callback) {
+	servers.POST({
+		url: "/api/wechat/reply_message",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "wechatPaymentToUser2"
+	}, callback);
+};
+/** End wechatPaymentToUser2 */
+
+
+
+/** 
+ * Created by getUserInfo
+ *
+ * 获取用户详情信息 Admin
+ *
+ * @id 	undefined-
+ * @weixin_openid 	undefined-
+ */
+exports.getUserInfo = function (data, callback) {
+	servers.GET({
+		url: "/api/user/detail",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "getUserInfo",
+		query: {
+			id: data.id,
+			weixin_openid: data.weixin_openid
+		}
+	}, callback);
+};
+/** End getUserInfo */
+
+
+
+/** 
  * Created by helloWorld2
  *
  * 根据订单id查询该订单对应的任务信息 (Todo)
@@ -958,23 +862,151 @@ exports.helloWorld2 = function (data, callback) {
 
 
 /** 
- * Created by submitOrder
+ * Created by getTaskReceiveDetail
  *
- * 提交订单（完成任务） User
+ * 查询某个任务的报名情况 User TODO
  *
- * @submitOrder 	undefined-Body
+ * @id 	undefined-
  */
-exports.submitOrder = function (data, callback) {
-	servers.POST({
-		url: "/api/order/submit",
+exports.getTaskReceiveDetail = function (data, callback) {
+	servers.GET({
+		url: "/api/task/get/receive_detail",
 		token: !data.TOKEN?"":data.TOKEN,
 		mock: !data.mock?false:data.mock,
-		swaggerId: "submitOrder",
+		swaggerId: "getTaskReceiveDetail",
+		query: {
+			id: data.id
+		}
+	}, callback);
+};
+/** End getTaskReceiveDetail */
+
+
+
+/** 
+ * Created by updateTaskInspect
+ *
+ * 审核任务（管理员） Admin
+ *
+ * @updateTaskInspect 	undefined-Body
+ */
+exports.updateTaskInspect = function (data, callback) {
+	servers.POST({
+		url: "/api/task/update/inspect",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "updateTaskInspect",
 		body: data.body,
 		query: {
 		}
 	}, callback);
 };
-/** End submitOrder */
+/** End updateTaskInspect */
+
+
+
+/** 
+ * Created by createTask
+ *
+ * 创建一个任务 Admin
+ *
+ * @createTask 	undefined-Body
+ */
+exports.createTask = function (data, callback) {
+	servers.POST({
+		url: "/api/task/created",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "createTask",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End createTask */
+
+
+
+/** 
+ * Created by loginByWeiXin
+ *
+ * 微信用户登录 User
+ *
+ * @Login 	undefined-Body
+ */
+exports.loginByWeiXin = function (data, callback) {
+	servers.POST({
+		url: "/api/auth/login/by_weixin",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "loginByWeiXin",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End loginByWeiXin */
+
+
+
+/** 
+ * Created by wechatPaymentTransfers
+ *
+ * 向某个微信用户发起企业付款
+ *
+ * @wechatPaymentTransfers 	undefined-Body
+ */
+exports.wechatPaymentTransfers = function (data, callback) {
+	servers.POST({
+		url: "/api/wechat/payment/transfers",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "wechatPaymentTransfers",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End wechatPaymentTransfers */
+
+
+
+/** 
+ * Created by getQiniuToken
+ *
+ * 获取七牛云上传文件的Token User
+ *
+ */
+exports.getQiniuToken = function (data, callback) {
+	servers.GET({
+		url: "/api/upload/qn/get_token",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "getQiniuToken"
+	}, callback);
+};
+/** End getQiniuToken */
+
+
+
+/** 
+ * Created by signUpSystemUser
+ *
+ * 创建系统用户 Admin
+ *
+ * @signUpSystem 	undefined-Body
+ */
+exports.signUpSystemUser = function (data, callback) {
+	servers.POST({
+		url: "/api/auth/sign_up_system",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "signUpSystemUser",
+		body: data.body,
+		query: {
+		}
+	}, callback);
+};
+/** End signUpSystemUser */
 
 

@@ -17,12 +17,12 @@
 				<el-form-item label="任务截止时间：">{{order.end_time | date}} &nbsp</el-form-item>
 				<el-form-item label="用户Id：">{{order.user_id}} &nbsp</el-form-item>
 				<el-form-item label="用户昵称：">{{order.user_nike_name}} &nbsp</el-form-item>
-				<el-form-item label="创建时间：">{{order.create_at | date}} &nbsp</el-form-item>
+				<el-form-item label="创建时间：">{{order.created_at | date}} &nbsp</el-form-item>
 				<el-form-item label="任务提交：">{{order.oss_id}} &nbsp</el-form-item>
 			</el-form>
 			<div v-if="oss">
 				<el-form ref="form" :model="form" label-width="160px">
-					<el-form-item label="提交时间：">{{oss.create_at | date}} &nbsp</el-form-item>
+					<el-form-item label="提交时间：">{{oss.created_at | date}} &nbsp</el-form-item>
 					<el-form-item label="提交文本：">{{oss.text}} &nbsp</el-form-item>
 					<el-form-item label="提交截图：">
 						<p v-for="item of oss.pic_list"><img :src="item" style="height: 200px;"></img></p>

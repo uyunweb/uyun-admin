@@ -63,6 +63,15 @@ const enums = {
 		label: "-所有审核方式-"
 	}],
 
+	// 任务审核方式
+	taskIsHotType: [{
+		value: 0,
+		label: "否"
+	}, {
+		value: 1,
+		label: "精选任务"
+	}],
+
 	// 规定任务完成时间
 	taskSubmitTime: [{
 		value: 1800,
@@ -120,6 +129,28 @@ const enums = {
 		label: "tags4"
 	}],
 
+	// 任务是否需要支付赏金
+	taskIsPaymentType: [{
+		value: 0,
+		label: "未知"
+	}, {
+		value: 1,
+		label: "无须支付"
+	}, {
+		value: 2,
+		label: "等待支付"
+	}, {
+		value: 3,
+		label: "支付成功"
+	}, {
+		value: 4,
+		label: "已退款"
+	}],
+	taskIsPaymentTypeFull: [{
+		value: -1,
+		label: "-所有支付状态-"
+	}],
+
 	// 管理员用户类型
 	adminUserType: [{
 		value: 0,
@@ -164,6 +195,59 @@ const enums = {
 	orderTypeFull: [{
 		value: -1,
 		label: "-全部订单-"
+	}],
+
+	// 流水类型
+	waterType: [{
+		value: 0,
+		label: "未成功"
+	}, {
+		value: 1,
+		label: "收入"
+	}, {
+		value: 2,
+		label: "支出"
+	}, {
+		value: 3,
+		label: "付款"
+	}],
+	waterTypeFull: [{
+		value: -1,
+		label: "-全部流水-"
+	}],
+
+	// 流水类型
+	waterCountType: [{
+		value: 0,
+		label: "未知"
+	}, {
+		value: 11,
+		label: "任务奖励"
+	}, {
+		value: 12,
+		label: "系统充值"
+	}, {
+		value: 13,
+		label: "签到奖励"
+	}, {
+		value: 14,
+		label: "活动中奖"
+	}, {
+		value: 21,
+		label: "用户提现"
+	}, {
+		value: 22,
+		label: "系统扣除"
+	}, {
+		value: 23,
+		label: "兑换消费"
+	}, {
+		value: 31,
+		label: "任务支出"
+	}],
+	waterCountTypeFull: [{
+		value: -1,
+		label: "-所有流水类型-"
 	}],
 
 	// 是否删除

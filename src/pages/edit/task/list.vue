@@ -83,13 +83,30 @@
 					</el-table-column>
 					<el-table-column label="创建时间" min-width="140">
 						<template slot-scope="scope">
-							{{scope.row.create_at | date}}
+							{{scope.row.created_at | date}}
 						</template>
 					</el-table-column>
-					<el-table-column label="审核状态">
+					<el-table-column label="精选">
+						<template slot-scope="scope">
+							{{scope.row.is_hot}}
+						</template>
+					</el-table-column>
+					<el-table-column label="公开">
+						<template slot-scope="scope">
+							{{scope.row.is_open}}
+						</template>
+					</el-table-column>
+					<el-table-column label="任务状态">
 						<template slot-scope="scope">
 							<font :class="'task_status_'+scope.row.status">
 								{{scope.row.status | matchingValue(enums.taskStatus)}}
+							</font>
+						</template>
+					</el-table-column>
+					<el-table-column label="支付状态">
+						<template slot-scope="scope">
+							<font :class="'payment_status_'+scope.row.is_payment">
+								{{scope.row.is_payment | matchingValue(enums.taskIsPaymentType)}}
 							</font>
 						</template>
 					</el-table-column>
@@ -98,7 +115,7 @@
 							<!--<el-button icon="el-icon-search" size="mini" plain>预览</el-button>-->
 							<el-button @click="onClickEditTask(scope.row)" type="success" icon="el-icon-edit" size="mini" plain>编辑</el-button>
 							<template v-if="scope.row.status===0">
-								<el-button @click="onClickInspectTask(scope)" type="primary" icon="el-icon-bell" size="mini" plain>审核</el-button>
+								<el-button v-if="!(scope.row.is_payment===2 || scope.row.is_payment===4)" @click="onClickInspectTask(scope)" type="primary" icon="el-icon-bell" size="mini" plain>审核</el-button>
 							</template>
 							<template v-else-if="scope.row.status===1">
 								<el-button @click="onClickInspectTask(scope)" icon="el-icon-download" size="mini" plain>下架</el-button>
@@ -326,4 +343,17 @@
 		color #f56c6c
 	.task_status_4
 		color #999
+
+	.payment_status_0
+		color #999
+	.payment_status_1
+		color #999
+	.payment_status_2
+		color #f56c6c
+	.payment_status_3
+		color #67c23a
+	.payment_status_4
+		color #999
+
+
 </style>

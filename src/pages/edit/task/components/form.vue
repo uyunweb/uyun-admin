@@ -218,6 +218,55 @@
 			</el-form-item>
 		</el-tab-pane>
 
+		<!--FIFTH CONTENT-->
+		<el-tab-pane label="运营参数" name="fifth">
+			<el-form-item label="排序">
+				<el-input type="number" v-model="form.sort"></el-input>
+			</el-form-item>
+			<el-form-item label="推荐任务">
+				<el-select v-model="form.is_hot" placeholder="请选择是否推荐任务" class="width-200-important">
+					<el-option
+						v-for="item in enums.taskIsHotType"
+						:key="item.value"
+						:label="item.label"
+						:value="item.value">
+					</el-option>
+				</el-select>
+			</el-form-item>
+			<el-form-item label="点击数">
+				<el-input type="number" v-model="form.clicks"></el-input>
+			</el-form-item>
+			<el-form-item label="收藏数">
+				<el-input type="number" v-model="form.collects"></el-input>
+			</el-form-item>
+			<el-form-item label="任务领取次数">
+				<el-input type="number" v-model="form.task_receive_num"></el-input>
+			</el-form-item>
+			<el-form-item label="任务完成次数">
+				<el-input type="number" v-model="form.task_complete_num"></el-input>
+			</el-form-item>
+			<el-form-item label="是否公开">
+				<el-input type="number" v-model="form.is_open"></el-input>
+			</el-form-item>
+		</el-tab-pane>
+
+		<!--FIFTH SIXTH-->
+		<el-tab-pane label="支付情况" name="sixth">
+			<el-form-item label="是否需要支付赏金">
+				<el-select v-model="form.is_payment" placeholder="请选择" class="width-200-important">
+					<el-option
+						v-for="item in enums.taskIsPaymentType"
+						:key="item.value"
+						:label="item.label"
+						:value="item.value">
+					</el-option>
+				</el-select>
+			</el-form-item>
+			<el-form-item label="支付流水ID">
+				<el-input disabled type="text" v-model="form.payment_water_id"></el-input>
+			</el-form-item>
+		</el-tab-pane>
+
 	</el-tabs>
 </template>
 

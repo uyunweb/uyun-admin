@@ -30,7 +30,7 @@
 					<el-table-column prop="sign_type" label="注册来源"></el-table-column>
 					<el-table-column label="创建时间" min-width="160">
 						<template slot-scope="scope">
-							{{scope.row.create_at | date}}
+							{{scope.row.created_at | date}}
 						</template>
 					</el-table-column>
 					<el-table-column label="状态">正常</el-table-column>
