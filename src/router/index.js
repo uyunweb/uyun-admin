@@ -20,9 +20,14 @@ import create_task from '../pages/edit/task/create';
 // 订单管理
 import order_list from '../pages/action/order/list';
 import order_detail from '../pages/action/order/detail';
-
 // 查看流水
 import water_list from '../pages/action/water/list';
+// 查看审核资料
+import oss_list from '../pages/action/oss/list';
+
+// 用户管理
+import user_list from '../pages/user/account/list';
+import user_detail from '../pages/user/account/detail';
 
 
 
@@ -143,6 +148,53 @@ let router = new Router({
 					component: water_list,
 					meta: {
 						name: '流水列表',
+						breadNumber: 1,
+					}
+				}]
+			}, {
+				path: 'oss',
+				component: EmptyRouter,
+				meta: {
+					name: '资料管理',
+					breadNumber: 1,
+				},
+				children: [{
+					path: 'list',
+					alias: '/',
+					component: oss_list,
+					meta: {
+						name: '提交资料列表',
+						breadNumber: 1,
+					}
+				}]
+			}]
+		}, {
+			path: '/user',
+			component: EmptyRouter,
+			meta: {
+				name: '用户管理',
+				breadNumber: 0,
+			},
+			children: [{
+				path: 'account',
+				component: EmptyRouter,
+				meta: {
+					name: '注册用户',
+					breadNumber: 1,
+				},
+				children: [{
+					path: 'list',
+					alias: '/',
+					component: user_list,
+					meta: {
+						name: '用户列表',
+						breadNumber: 1,
+					}
+				}, {
+					path: 'detail',
+					component: user_detail,
+					meta: {
+						name: '用户详情',
 						breadNumber: 1,
 					}
 				}]

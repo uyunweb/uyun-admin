@@ -144,6 +144,22 @@ const Utils = {
 			}
 		}
 	},
+
+	deleteNull(obj) {
+		for(let key in obj){
+			if(obj[key] === null || obj[key] === ""){
+				delete obj[key];
+			} else if(typeof obj[key] === "object"){
+				for(let key2 in obj[key]){
+					if(obj[key][key2] === null || obj[key][key2] === ""){
+						delete obj[key][key2];
+					}
+				}
+			}
+		}
+		return obj;
+	},
+
 };
 
 export default Utils;

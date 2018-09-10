@@ -27,7 +27,7 @@ console.info("NODE START-UP :::::: Config is", JSON.stringify(siteConfig));
 
 module.exports = {
 	// 项目名称
-	name: "uyun.net.admin",
+	name: "uyun.net.account",
 	// 描述
 	description: "内容管理平台",
 	// 版本号

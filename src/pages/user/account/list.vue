@@ -2,30 +2,49 @@
 	<div class="panel">
 		<div class="panel-content">
 			<div class="select-search" style="padding-bottom: 15px;">
-				系统管理员
-				<router-link to="/system/admin/create">
-					<el-button class="_right" type="success" icon="el-icon-search" size="small" plain>添加管理员</el-button>
-				</router-link>
+				<el-select
+					v-model="selected.type"
+					size="small"
+					placeholder="---请选择用户类型---"
+					@change="ajaxGetAdminAccountList">
+					<el-option
+						v-for="item in enums.userTypeFull"
+						:key="item.value"
+						:label="item.label"
+						:value="item.value">
+					</el-option>
+				</el-select>
 			</div>
 
 			<div class="report-list">
 				<el-table class="topic-table" :data="tableData" border v-loading="loading" style="min-height: 400px;">
 					<el-table-column type="index" width="50"></el-table-column>
-					<el-table-column prop="id" label="ID"></el-table-column>
-					<el-table-column prop="login_name" label="登录名"></el-table-column>
+					<!--<el-table-column prop="id" label="ID" width="200"></el-table-column>-->
+					<el-table-column label="昵称">
+						<template slot-scope="scope">
+							<router-link :to='{path: "/user/oss/detail", query: {id:scope.row.id}}'>
+								<img v-if="scope.row.avatar_url" :src="scope.row.avatar_url" class="user-face-min" />
+								{{scope.row.nick_name || scope.row.user_id}}
+							</router-link>
+						</template>
+					</el-table-column>
+					<el-table-column prop="province" label="所在省份"></el-table-column>
 					<el-table-column prop="type" label="账号类型"></el-table-column>
-					<el-table-column prop="admin_level" label="账号权限"></el-table-column>
 					<el-table-column prop="sign_type" label="注册来源"></el-table-column>
+					<el-table-column prop="mobile" label="手机号码" width="100"></el-table-column>
+					<el-table-column prop="wallet_cash" label="余额"></el-table-column>
+					<!--<el-table-column label="推广Id"></el-table-column>-->
 					<el-table-column label="创建时间" min-width="160">
 						<template slot-scope="scope">
 							{{scope.row.created_at | date}}
 						</template>
 					</el-table-column>
-					<el-table-column label="状态">正常</el-table-column>
-					<el-table-column label="操作" min-width="300px">
+					<el-table-column label="操作" min-width="120px">
 						<template slot-scope="scope">
-							<el-button @click="onClickEditAdminAccount(scope.row.id)" type="success" icon="el-icon-edit" size="mini" plain>修改密码</el-button>
-							<el-button @click="onClickDeleteAdminAccount(scope)" type="warning" icon="el-icon-delete" size="mini" plain>删除</el-button>
+							<router-link :to='{path: "/user/oss/detail", query: {id:scope.row.id}}'>
+								<el-button type="success" icon="el-icon-edit" size="mini" plain>查看</el-button>
+							</router-link>
+
 						</template>
 					</el-table-column>
 				</el-table>
@@ -42,6 +61,9 @@
 		data() {
 			return {
 				enums: enums,
+				selected: {
+					type: -1
+				},
 				loading:false,
 				tableData:[]
 			};
@@ -54,7 +76,7 @@
 				this.loading = true;
 				// 获取用户列表 for test
 				this.$ajax.gateway("/apis/getUserList", {
-					type: 4
+					type: this.selected.type
 				}, (data) => {
 					this.loading = false;
 					if(data.code===200){

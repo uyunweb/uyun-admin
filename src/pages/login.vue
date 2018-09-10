@@ -29,7 +29,7 @@ export default {
 		return {
 			isLogin: true,
 			form: {
-				account: "admin",
+				account: "account",
 				password: ""
 			}
 		};

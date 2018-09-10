@@ -151,6 +151,38 @@ const enums = {
 		label: "-所有支付状态-"
 	}],
 
+	// 提交审核的任务资料类型
+	ossType: [{
+		value: 0,
+		label: "普通用户"
+	}, {
+		value: 1,
+		label: "正常"
+	}, {
+		value: 2,
+		label: "作废"
+	}],
+	ossTypeFull: [{
+		value: -1,
+		label: "-所有状态-"
+	}],
+
+	// 用户类型
+	userType: [{
+		value: 0,
+		label: "普通用户"
+	}, {
+		value: 1,
+		label: "实名认证用户"
+	}, {
+		value: 2,
+		label: "企业商家"
+	}],
+	userTypeFull: [{
+		value: -1,
+		label: "-所有用户-"
+	}],
+
 	// 管理员用户类型
 	adminUserType: [{
 		value: 0,
@@ -164,6 +196,10 @@ const enums = {
 	}, {
 		value: 3,
 		label: "内容审核员"
+	}],
+	adminUserTypeFull: [{
+		value: -1,
+		label: "-所有管理员-"
 	}],
 
 	// 订单类型

@@ -62,7 +62,7 @@
 							</a>
 						</template>
 						<el-menu-item index="/edit/task" class="sub-menu-item">任务列表</el-menu-item>
-						<el-menu-item index="/edit/homepage" class="sub-menu-item">首页Banner</el-menu-item>
+						<!--<el-menu-item index="/edit/homepage" class="sub-menu-item">首页Banner</el-menu-item>-->
 					</el-submenu>
 					<el-submenu
 						index="action"
@@ -75,9 +75,10 @@
 						</template>
 						<el-menu-item index="/action/order" class="sub-menu-item">报名管理</el-menu-item>
 						<el-menu-item index="/action/water" class="sub-menu-item">提现管理</el-menu-item>
+						<el-menu-item index="/action/oss" class="sub-menu-item">资料管理</el-menu-item>
 					</el-submenu>
 					<el-submenu
-						index="propertys"
+						index="user"
 						class="with-sub-menu">
 						<template slot="title" class="menu-item">
 							<a class="menu-item">
@@ -85,7 +86,7 @@
 								<span>用户管理</span>
 							</a>
 						</template>
-						<el-menu-item index="/property/appaccess" class="sub-menu-item">注册用户</el-menu-item>
+						<el-menu-item index="/user/account" class="sub-menu-item">注册用户</el-menu-item>
 					</el-submenu>
 					<el-submenu
 						index="system"
@@ -97,7 +98,7 @@
 							</a>
 						</template>
 						<el-menu-item index="/system/admin" class="sub-menu-item">系统管理员</el-menu-item>
-						<el-menu-item index="/property/appaccess" class="sub-menu-item">修改密码</el-menu-item>
+						<!--<el-menu-item index="/property/appaccess" class="sub-menu-item">修改密码</el-menu-item>-->
 					</el-submenu>
 				</template>
 			</el-menu>

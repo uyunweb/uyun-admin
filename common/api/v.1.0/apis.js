@@ -246,7 +246,16 @@ exports.getOssDetail = function (data, callback) {
 };
 /** End getOssDetail */
 
-
+exports.getOssList = function (data, callback) {
+	servers.GET({
+		url: "/api/order/get/oss_list",
+		token: !data.TOKEN?"":data.TOKEN,
+		mock: !data.mock?false:data.mock,
+		swaggerId: "getOssList",
+		query: {
+		}
+	}, callback);
+};
 
 /** 
  * Created by getUserList

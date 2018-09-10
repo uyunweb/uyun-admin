@@ -16,7 +16,7 @@
 	export default {
 		data() {
 			return {
-				iconList: ["icons-add", "icons-admin", "icons-allow", "icons-calendar", "icons-chart", "icons-close",
+				iconList: ["icons-add", "icons-oss", "icons-allow", "icons-calendar", "icons-chart", "icons-close",
 					"icons-column", "icons-comment", "icons-content", "icons-delete", "icons-drop-down", "icons-edit",
 					"icons-export-single", "icons-export", "icons-fold", "icons-forbid", "icons-histogram",
 					"icons-import-single", "icons-import","icons-logout", "icons-money", "icons-not-allow", "icons-off",

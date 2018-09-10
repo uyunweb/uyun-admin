@@ -17,6 +17,7 @@
 </template>
 
 <script>
+	import utils from '../../../utils/utils';
 	import TaskMixins from './mixins/form';
 
 	import PanelHeader from '../../../components/PanelHeader.vue';
@@ -60,6 +61,8 @@
 			onSubmit() {
 				console.log('submit!');
 				console.log(this.form);
+
+				this.form = utils.deleteNull(this.form);
 
 				// 验证
 				let isValidateError = this.validateTaskData(this.form);
